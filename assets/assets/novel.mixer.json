@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "note": "音の通り道。amb_（鳴り続ける環境音）は ambience のバス、se_（シナリオの効果音・ポコッ・入退室）と ui_（返事の音）は se のバス。大音量の砂嵐（amb_static_loud）とハウリング（se_howl）は loud のバスへ通し、その音量を上限にする（耳を劈く場面でも、設定の音量 × この上限より大きくしない）。バスの音量は設定の画面の値を Controls.mixerOf が掛ける（loud は全体 × 環境音）。panel = 画面（バックログ・セーブ・設定）や確認のウィンドウを開いている間の聞こえ方（環境音を籠もらせる）。ducks の depth は効果音が鳴る間に環境音へ残す倍率。",
+  "defaultBus": "se",
+  "transitionSeconds": 0.4,
+  "buses": [
+    {
+      "name": "ambience",
+      "volume": 0.7,
+      "lowpassGainHF": 1.0
+    },
+    {
+      "name": "se",
+      "volume": 0.8,
+      "lowpassGainHF": 1.0
+    },
+    {
+      "name": "loud",
+      "volume": 0.55,
+      "lowpassGainHF": 1.0
+    }
+  ],
+  "routes": [
+    {
+      "bus": "ambience",
+      "prefixes": [
+        "amb_"
+      ]
+    },
+    {
+      "bus": "se",
+      "prefixes": [
+        "se_",
+        "ui_"
+      ]
+    },
+    {
+      "bus": "loud",
+      "prefixes": [
+        "amb_static_loud",
+        "se_howl"
+      ]
+    }
+  ],
+  "ducks": [
+    {
+      "bus": "ambience",
+      "by": [
+        "se"
+      ],
+      "depth": 0.85,
+      "attackSeconds": 0.05,
+      "holdSeconds": 0.2,
+      "releaseSeconds": 0.6
+    }
+  ],
+  "cooldowns": [
+    {
+      "prefix": "ui_cursor",
+      "seconds": 0.04
+    }
+  ],
+  "snapshots": [
+    {
+      "name": "panel",
+      "buses": [
+        {
+          "name": "ambience",
+          "lowpassGainHF": 0.25
+        },
+        {
+          "name": "loud",
+          "lowpassGainHF": 0.25
+        }
+      ]
+    }
+  ]
+}

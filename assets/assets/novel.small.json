@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "title": "小さい画面の字とボタンの大きさ",
+  "note": "小さい画面の時だけ使う大きさ（design px。960×540 の中の px）。PC・タブレット・デスクトップ版はこの Doc を読まない。横持ち 892×412 の画面では 1 design px が 0.763 CSS px なので、押せる大きさの 44 CSS px は 58、字の 15 CSS px は 20 前後。小さい画面ではチャンネルの列とメンバーの列を畳み、会話を画面いっぱいに出す。title* = タイトル画面のメニュー、button* = チャットの見出しのクイックメニュー、chat* = チャットの本文と名前、thoughtSize = 地の文、back* = 画面の右上の「戻る」、tab* = セーブ・ロードのページのタブ、setting* = 設定の行、askButton* = 確認のウィンドウのはい・いいえ。*TextSize = 字の大きさ、*Height = 押せる高さ。",
+  "titleItemTextSize": 28.0,
+  "titleItemHeight": 58.0,
+  "buttonTextSize": 17.0,
+  "buttonHeight": 58.0,
+  "chatBodySize": 21.0,
+  "chatNameSize": 20.0,
+  "thoughtSize": 27.0,
+  "backTextSize": 20.0,
+  "backHeight": 58.0,
+  "tabTextSize": 20.0,
+  "tabHeight": 58.0,
+  "settingTextSize": 18.0,
+  "settingRowHeight": 58.0,
+  "askButtonTextSize": 22.0,
+  "askButtonHeight": 58.0
+}

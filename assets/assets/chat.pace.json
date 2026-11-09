@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "note": "チャットの流れの数。chatClockStart / minutesPerPost = 最初の発言の時刻と、発言 1 つで進む分（発言の横の時刻）、*Cps = 打つ速さ（1 秒の字数。設定の「文字の速さ」が既定の何倍かを掛ける）、gapBase / gapPerChar = 発言を出し終えてから次へ流すまでの秒と 1 字あたりに足す秒、gapLong / gapLonger = シナリオの #gap:long / #gap:longer で足す秒、feedMax = 履歴に残す行の数、slideSeconds = 新しい発言が履歴を押し上げる秒、thoughtDim / thoughtFadeSeconds = 地の文の層でチャットを沈める濃さと出入りの秒、scareSeconds = 血文字を出している秒。地の文は人が押して進める（オートの待ちは novel.kind.json）。",
+  "chatClockStart": "23:41",
+  "minutesPerPost": 0.25,
+  "amanatsuCps": 15.0,
+  "kaaboCps": 10.0,
+  "kansaiCps": 17.0,
+  "casterCps": 16.0,
+  "gapBase": 0.9,
+  "gapPerChar": 0.06,
+  "gapLong": 1.8,
+  "gapLonger": 3.2,
+  "feedMax": 40,
+  "slideSeconds": 0.24,
+  "thoughtDim": 0.82,
+  "thoughtFadeSeconds": 0.6,
+  "scareSeconds": 0.7
+}
