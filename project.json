@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "title": "呪いのチャット",
+  "designWidth": 960,
+  "designHeight": 540,
+  "windowWidth": 1280,
+  "windowHeight": 720,
+  "clearColor": {
+    "r": 0.0,
+    "g": 0.0,
+    "b": 0.0
+  },
+  "maxDeltaTime": 0.05,
+  "// textures": "絵の部品に貼る画像。ChatGPT で作った物（CREDITS.md）。名前は src/Art.flix の Art.textureOf と対。届いていない部品は図形で描く（Art.imageOf）。",
+  "textures": [
+    {
+      "name": "gpt_avatar_amanatsu",
+      "path": "assets/gpt/avatar_amanatsu.png",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_avatar_kaabo",
+      "path": "assets/gpt/avatar_kaabo.png",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_avatar_kansai",
+      "path": "assets/gpt/avatar_kansai.png",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_avatar_unknown",
+      "path": "assets/gpt/avatar_unknown.png",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_bg_room",
+      "path": "assets/gpt/bg_room.jpg",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_bg_room_flooded",
+      "path": "assets/gpt/bg_room_flooded.jpg",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_tv_news",
+      "path": "assets/gpt/tv_news.jpg",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_tv_news_fallen",
+      "path": "assets/gpt/tv_news_fallen.jpg",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_water_drops",
+      "path": "assets/gpt/water_drops.png",
+      "hasAlpha": true
+    },
+    {
+      "name": "gpt_blood_text",
+      "path": "assets/gpt/blood_text.png",
+      "hasAlpha": false
+    },
+    {
+      "name": "gpt_title",
+      "path": "assets/gpt/title.jpg",
+      "hasAlpha": false
+    }
+  ],
+  "// glyphs": "起動時に焼く字。used = ソースとアセットにある字を先に焼く（シナリオの字がそろってからタイトル画面が出る）。default = チャットアプリの字（丸ゴシック）、mincho = 地の文と血文字の字（明朝）",
+  "glyphs": "used",
+  "fonts": [
+    {
+      "name": "default",
+      "path": "assets/MPLUSRounded1c-Bold.subset.ttf",
+      "fontSize": 32.0
+    },
+    {
+      "name": "mincho",
+      "path": "assets/ShipporiMincho-Regular.subset.ttf",
+      "fontSize": 32.0
+    }
+  ],
+  "sounds": [
+    {
+      "name": "amb_room",
+      "path": "assets/sfx/amb_room.wav",
+      "looping": true
+    },
+    {
+      "name": "amb_static",
+      "path": "assets/sfx/amb_static.wav",
+      "looping": true
+    },
+    {
+      "name": "amb_static_loud",
+      "path": "assets/sfx/amb_static_loud.wav",
+      "looping": true
+    },
+    {
+      "name": "amb_water",
+      "path": "assets/sfx/amb_water.wav",
+      "looping": true
+    },
+    {
+      "name": "se_post",
+      "path": "assets/sfx/se_post.wav",
+      "looping": false
+    },
+    {
+      "name": "se_join",
+      "path": "assets/sfx/se_join.wav",
+      "looping": false
+    },
+    {
+      "name": "se_leave",
+      "path": "assets/sfx/se_leave.wav",
+      "looping": false
+    },
+    {
+      "name": "se_drip",
+      "path": "assets/sfx/se_drip.wav",
+      "looping": false
+    },
+    {
+      "name": "se_thud",
+      "path": "assets/sfx/se_thud.wav",
+      "looping": false
+    },
+    {
+      "name": "se_howl",
+      "path": "assets/sfx/se_howl.wav",
+      "looping": false
+    },
+    {
+      "name": "se_behind",
+      "path": "assets/sfx/se_behind.wav",
+      "looping": false
+    },
+    {
+      "name": "ui_page",
+      "path": "assets/sfx/ui_page.wav",
+      "looping": false
+    },
+    {
+      "name": "ui_cursor",
+      "path": "assets/sfx/ui_cursor.wav",
+      "looping": false
+    },
+    {
+      "name": "ui_open",
+      "path": "assets/sfx/ui_open.wav",
+      "looping": false
+    },
+    {
+      "name": "ui_save",
+      "path": "assets/sfx/ui_save.wav",
+      "looping": false
+    }
+  ],
+  "editor": {
+    "resources": [
+      {
+        "id": "story",
+        "pattern": "assets/novel.story.json",
+        "title": "画面の言葉（タイトル・チャットアプリの字・ボタン・セーブ）と話し手の呼び名",
+        "role": "material",
+        "schema": "assets/story.schema.json"
+      },
+      {
+        "id": "pace",
+        "pattern": "assets/chat.pace.json",
+        "title": "チャットの流れ（打つ速さ・発言の間・時刻・地の文の層・血文字の秒）",
+        "role": "tuning",
+        "schema": "assets/pace.schema.json"
+      },
+      {
+        "id": "art",
+        "pattern": "assets/chat.art.json",
+        "title": "地の文の層の奥（room = 部屋の絵・none = 背景なし）",
+        "role": "material",
+        "schema": "assets/art.schema.json"
+      },
+      {
+        "id": "theme",
+        "pattern": "assets/novel.theme.json",
+        "title": "色（UI の地・3 人の色・水と血）",
+        "role": "material",
+        "schema": "assets/theme.schema.json"
+      },
+      {
+        "id": "credits",
+        "pattern": "assets/novel.credits.json",
+        "title": "クレジット（音・絵・フォントの出典）",
+        "role": "material",
+        "schema": "assets/credits.schema.json"
+      },
+      {
+        "id": "kind",
+        "pattern": "assets/novel.kind.json",
+        "title": "手触り（字の大きさ・オート・スキップ・揺れ）",
+        "role": "tuning",
+        "schema": "assets/kind.schema.json"
+      },
+      {
+        "id": "keys",
+        "pattern": "assets/novel.keys.json",
+        "title": "操作（キーの割り当て）",
+        "role": "tuning",
+        "schema": "assets/keys.schema.json"
+      },
+      {
+        "id": "small",
+        "pattern": "assets/novel.small.json",
+        "title": "小さい画面の字とボタンの大きさ",
+        "role": "tuning",
+        "schema": "assets/small.schema.json"
+      },
+      {
+        "id": "portrait",
+        "pattern": "assets/novel.portrait.json",
+        "title": "縦の画面の字とボタンの大きさ",
+        "role": "tuning",
+        "schema": "assets/portrait.schema.json"
+      },
+      {
+        "id": "mixer",
+        "pattern": "assets/novel.mixer.json",
+        "title": "音の通り道（環境音と効果音のバス）",
+        "role": "tuning"
+      },
+      {
+        "id": "project",
+        "pattern": "project.json",
+        "title": "ゲームの題・画面",
+        "role": "tuning",
+        "schema": "project.schema.json"
+      }
+    ]
+  },
+  "web": {
+    "startPrompt": "タッチして開始",
+    "compress": {
+      "lossyImages": [
+        {
+          "glob": "assets/gpt/*.jpg",
+          "quality": 85
+        }
+      ]
+    },
+    "embed": [
+      "assets/talk/dialogue.json"
+    ],
+    "omit": [
+      "assets/talk/*.yarn",
+      "assets/*.schema.json"
+    ],
+    "// deferred": "押して始めた後に裏で取る素材（シナリオで出てくる順）。タイトルの絵・アバター・部屋の絵・チャットの音（ポコッ・入退室・部屋の環境音）は起動時に取る。届く前の環境音は暗転で待ち、一発の音は鳴らさずに進み、画像はその部品だけ図形で描く（Art.imageOf）。",
+    "deferred": [
+      "assets/gpt/bg_room_flooded.jpg",
+      "assets/sfx/amb_water.wav",
+      "assets/sfx/se_drip.wav",
+      "assets/gpt/tv_news.jpg",
+      "assets/sfx/amb_static.wav",
+      "assets/gpt/tv_news_fallen.jpg",
+      "assets/sfx/se_thud.wav",
+      "assets/sfx/se_howl.wav",
+      "assets/gpt/water_drops.png",
+      "assets/sfx/amb_static_loud.wav",
+      "assets/gpt/blood_text.png",
+      "assets/sfx/se_behind.wav"
+    ],
+    "keysDoc": "assets/novel.keys.json",
+    "touchGestures": {
+      "longPress": "back",
+      "swipeLeft": "rollback"
+    },
+    "orientation": "any",
+    "// portraitDesign": "スマホを縦に持って開くと縦の design（幅 540・高さは画面の比から 960〜1296）で起動する。並べ方は src/Layout.flix の Portrait、大きさは assets/novel.portrait.json。",
+    "portraitDesign": {
+      "width": 540,
+      "minHeight": 960,
+      "maxHeight": 1296
+    }
+  }
+}

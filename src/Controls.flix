@@ -1,0 +1,363 @@
+// Controls — 入力の解釈・音の宣言・Doc の読み込みと読み直し（純粋。読み込みだけ Fs.FileRead）。
+// キーは KeysDoc（novel.keys.json）の割り当て、クリックは Layout の矩形（View が描く所と同じ）で当てる。
+// 入力の効き先は「いちばん手前の物」1 つ: 確認のウィンドウ → 開いている画面 → クイックメニュー → 本文（送る）。
+mod Controls {
+    use fge::{App, AudioMixer, AudioMixerDoc, Display, DocTable, Emit, LoadProgress, Log, Rect2, Resources}
+    use fge::GameEngine.Key
+
+    // ── 毎フレームの系 ──
+
+    /// 実時間の今を World へ写し、打つ・待ち・発言の間・オート・スキップ（素材を待っている間は待ちの段）を 1 歩進める。
+    pub def step(frame: App.Frame, res: Res.Res, w: World.World): World.World =
+        let (next, events) = Emit.collectInto(() -> WorldRead.step(res, frame#dt, { realNow = frame#realNow | w }), w#events);
+        noteGaveUp(res, w, { events = events | next })
+
+    /// このコマで待ち切れずに諦めた素材があれば 1 行知らせる（諦めた事は World の gaveUp に残る）。
+    // WhyNot: WorldRead の中で知らせない — 規則のテストが stderr に出た行で落ちる。
+    def noteGaveUp(res: Res.Res, before: World.World, after: World.World): World.World =
+        let gaveUpOf = (w: World.World) -> World.readOf(w) |> Option.map(r -> r#gaveUp) |> Option.getWithDefault(Set.empty());
+        let fresh = Set.difference(gaveUpOf(after), gaveUpOf(before));
+        if (Set.isEmpty(fresh) or not World.isReading(before)) after
+        else Log.warnThen("[hold] ${Set.join(", ", fresh)} が ${Float64.toString(KindDoc.rec(res#kind)#holdGiveUpSeconds)} 秒待っても届かないので、無いまま進む", after)
+
+    /// 入力の解釈。規則が出した出来事は events 欄に溜める（音は sounds が前後の差で読む）。
+    pub def interact(frame: App.Frame, res: Res.Res, w: World.World): World.World =
+        let pointed = World.withPointer({ x = frame#cursor#x, y = frame#cursor#y }, w);
+        let (next, events) = Emit.collectInto(() -> interpret(res, frame, pointed), pointed#events);
+        { events = events | next }
+
+    /// 終了の判定（Game の App.quitWhen）。確認のウィンドウで「はい」を選んだ時だけ。
+    pub def isQuit(_frame: App.Frame, w: World.World): Bool = w#quitting
+
+    def tapped(keys: List[Key], frame: App.Frame): Bool = List.exists(key -> App.justPressed(key, frame), keys)
+
+    def clickedOn(r: Rect2.Rect2, frame: App.Frame): Bool = frame#mouseClicked and Layout.contains(r, frame#cursor)
+
+    def keysOf(res: Res.Res): KeysDoc.Rec = KeysDoc.rec(res#keys)
+
+    /// このフレームの並べ方の組（View が ViewCtx#display から引く組と同じ。縦の design なら Frame#viewport が縦長）。
+    def fitOf(res: Res.Res, frame: App.Frame): Layout.Fit =
+        Layout.fitOf(frame#sizeClass, Display.orientationOf(frame#viewport), frame#viewport, res#smallScreen, res#portrait)
+
+    def interpret(res: Res.Res, frame: App.Frame, w: World.World): World.World \ Emit[World.Event] =
+        if (Option.nonEmpty(w#ask)) askInput(res, frame, w)
+        else if (w#panel != World.Panel.Closed) panelInput(res, frame, w)
+        else match w#scene {
+            case World.Scene.Title(_)      => titleInput(res, frame, w)
+            // WhyNot: 素材を待つ間にメニューやセーブを開かせない — 画面は黒で押せる物が見えず、待ちは長くても数十秒で明ける。
+            case World.Scene.Reading(_)    => if (World.isHolding(w)) w else readingInput(res, frame, w)
+            case World.Scene.Credits(_, _) =>
+                let k = keysOf(res);
+                if (World.creditsOver(res, Layout.height(fitOf(res, frame)), w) or frame#mouseClicked or tapped(k#confirm, frame) or tapped(k#back, frame)) World.toTitle(w)
+                else w
+        }
+
+    // ── 確認のウィンドウ ──
+
+    /// はい / いいえ: ←→↑↓ でカーソル、決定で答える、戻るは「いいえ」。マウスは乗った方へカーソルを寄せ、押した方で答える。
+    def askInput(res: Res.Res, frame: App.Frame, w: World.World): World.World \ Emit[World.Event] =
+        let k = keysOf(res);
+        let hovered = Layout.sideAt(Layout.askButton(fitOf(res, frame)), frame#cursor) |> Option.map(WorldMenu.answerOn);
+        match hovered {
+            case Some(a) if frame#mouseClicked => WorldMenu.answer(res, a, w)
+            case Some(a) if frame#mouseMoved   => World.moveAsk(a, w)
+            case _ =>
+                if (tapped(k#back, frame)) WorldMenu.answer(res, World.Answer.No, w)
+                else if (tapped(k#confirm, frame)) WorldMenu.answerHere(res, w)
+                else if (tapped(k#left, frame) or tapped(k#prev, frame)) World.moveAsk(World.Answer.Yes, w)
+                else if (tapped(k#right, frame) or tapped(k#next, frame)) World.moveAsk(World.Answer.No, w)
+                else w
+        }
+
+    // ── タイトル ──
+
+    def titleInput(res: Res.Res, frame: App.Frame, w: World.World): World.World \ Emit[World.Event] =
+        let k = keysOf(res);
+        let items = WorldMenu.titleItems();
+        let hovered = Layout.hitOf(List.length(items), i -> Layout.titleItem(fitOf(res, frame), i, List.length(items)), frame#cursor)
+            |> Option.flatMap(i -> List.nth(i, items)) |> Option.filter(item -> WorldMenu.isTitleItemOpen(item, w#saves));
+        match hovered {
+            case Some(item) if frame#mouseClicked => WorldMenu.chooseTitle(res, item, w)
+            case Some(item) if frame#mouseMoved   => WorldMenu.pointTitle(item, w)
+            case _ =>
+                if (tapped(k#quit, frame)) World.askFor(World.Ask.Quit, w)
+                else if (tapped(k#prev, frame)) WorldMenu.moveTitle(-1, w)
+                else if (tapped(k#next, frame)) WorldMenu.moveTitle(1, w)
+                else if (tapped(k#confirm, frame)) WorldMenu.chooseTitleHere(res, w)
+                else w
+        }
+
+    // ── 読んでいる間 ──
+
+    /// 読んでいる間: クイックメニュー（チャットの画面の時だけ）→ キー → 押すと送る（打っている途中ならすぐ送信・出し終えた後なら間を飛ばす）。
+    def readingInput(res: Res.Res, frame: App.Frame, w: World.World): World.World \ Emit[World.Event] =
+        let k = keysOf(res);
+        let buttons = WorldMenu.buttonsOf(fitOf(res, frame));
+        let shown = WorldMenu.showsButtons(World.stageOf(res, w)#screen);
+        let pressed = Layout.hitOf(List.length(buttons), i -> Layout.button(fitOf(res, frame), i, List.length(buttons)), frame#cursor)
+            |> Option.filter(_ -> frame#mouseClicked and shown) |> Option.flatMap(i -> List.nth(i, buttons));
+        match pressed {
+            case Some(button) => WorldMenu.press(res, button, w)
+            case None =>
+                if (tapped(k#log, frame) or frame#wheel > 0.0) WorldMenu.press(res, World.Button.Log, w)
+                else if (tapped(k#rollback, frame)) WorldMenu.press(res, World.Button.Rollback, w)
+                else if (tapped(k#auto, frame)) WorldMenu.press(res, World.Button.Auto, w)
+                else if (tapped(k#skip, frame)) WorldMenu.press(res, World.Button.Skip, w)
+                else if (tapped(k#quickSave, frame)) WorldMenu.press(res, World.Button.QuickSave, w)
+                else if (tapped(k#quickLoad, frame)) WorldMenu.press(res, World.Button.QuickLoad, w)
+                else if (frame#mouseClicked or tapped(k#confirm, frame)) WorldRead.advance(res, w)
+                else w
+        }
+
+    // ── 画面 ──
+
+    def panelInput(res: Res.Res, frame: App.Frame, w: World.World): World.World \ Emit[World.Event] =
+        let k = keysOf(res);
+        let back = tapped(k#back, frame) or clickedOn(Layout.back(fitOf(res, frame)), frame);
+        match w#panel {
+            case World.Panel.Closed => w
+            case World.Panel.Log(offset)     => logInput(res, frame, back, offset, w)
+            case World.Panel.SaveSlots(_, _) => slotsInput(res, frame, back, w)
+            case World.Panel.LoadSlots(_, _) => slotsInput(res, frame, back, w)
+            case World.Panel.Settings(at)    => settingsInput(res, frame, back, at, w)
+            case World.Panel.Menu(at)        => menuInput(res, frame, back, at, w)
+        }
+
+    /// ≡ のメニュー: 項目を押すとその項目へ、メニューの外を押すか戻るで閉じる。キーは ↑↓ と決定。
+    def menuInput(res: Res.Res, frame: App.Frame, back: Bool, cursor: Int32, w: World.World): World.World \ Emit[World.Event] =
+        let k = keysOf(res);
+        let fit = fitOf(res, frame);
+        let items = WorldMenu.menuItems();
+        let count = List.length(items);
+        let hovered = Layout.hitOf(count, i -> Layout.menuItem(fit, i, count), frame#cursor);
+        let outside = frame#mouseClicked and not Layout.contains(Layout.menuBox(fit, count), frame#cursor);
+        let pickItem = i -> List.nth(i, items) |> Option.map(item -> WorldMenu.chooseMenu(res, item, w)) |> Option.getWithDefault(w);
+        match hovered {
+            case Some(i) if frame#mouseClicked => pickItem(i)
+            case Some(i) if frame#mouseMoved   => WorldMenu.pointMenu(i, w)
+            case _ =>
+                if (back or outside) World.closePanel(w)
+                else if (tapped(k#prev, frame)) WorldMenu.moveMenu(-1, w)
+                else if (tapped(k#next, frame)) WorldMenu.moveMenu(1, w)
+                else if (tapped(k#confirm, frame)) pickItem(cursor)
+                else w
+        }
+
+    /// バックログ: ホイールと ↑↓ で遡る（一番下でホイールを下へ回すと閉じる）。戻れる行をクリックすると、その場面へ戻るか尋ねる。
+    def logInput(res: Res.Res, frame: App.Frame, back: Bool, offset: Float64, w: World.World): World.World \ Emit[World.Event] =
+        let k = keysOf(res);
+        let fit = fitOf(res, frame);
+        let size = View.logScrollSize(fit, res, w);
+        let row = View.logRowHeight(fit, res, w);
+        let clicked = if (frame#mouseClicked) View.logEntryAt(fit, res, frame#cursor, w) else None;
+        match clicked {
+            case Some(i) => WorldLog.askJump(i, w)
+            case None =>
+                if (back or tapped(k#log, frame)) World.closePanel(w)
+                else if (frame#wheel < 0.0 and offset <= 0.0) World.closePanel(w)
+                else if (frame#wheel != 0.0) WorldLog.scrollLog(frame#wheel * row * 2.0, size, w)
+                else if (tapped(k#prev, frame)) WorldLog.scrollLog(row, size, w)
+                else if (tapped(k#next, frame)) WorldLog.scrollLog(-row, size, w)
+                else w
+        }
+
+    /// セーブ・ロード: タブでページ、枠のクリックか決定で選ぶ、右上の × か Delete で削除。
+    /// ↑↓ は 1 行（2 枠）、←→ は 1 枠動く。Q / E（tabPrev / tabNext）でページを替える。
+    def slotsInput(res: Res.Res, frame: App.Frame, back: Bool, w: World.World): World.World \ Emit[World.Event] =
+        let k = keysOf(res);
+        let fit = fitOf(res, frame);
+        let count = Saves.perPage();
+        let tabs = WorldSaves.tabsOf(w);
+        let tabHit = if (frame#mouseClicked) Layout.hitOf(List.length(tabs), Layout.tab(fit, List.length(tabs)), frame#cursor) |> Option.flatMap(j -> List.nth(j, tabs)) else None;
+        let removeHit = if (frame#mouseClicked) Layout.hitOf(count, Layout.remove(fit), frame#cursor) else None;
+        let slotHit = Layout.hitOf(count, Layout.slot(fit), frame#cursor);
+        match (tabHit, removeHit, slotHit) {
+            case (Some(tab), _, _)      => WorldSaves.withTab(tab, w)
+            case (None, Some(i), _)     => WorldSaves.deleteSlot(i, w)
+            case (None, None, Some(i)) if frame#mouseClicked => WorldSaves.chooseSlot(res, i, w)
+            case (None, None, Some(i)) if frame#mouseMoved   => WorldSaves.pointSlot(i, w)
+            case _ =>
+                if (back) World.closePanel(w)
+                else if (tapped(k#tabPrev, frame)) WorldSaves.moveTab(-1, w)
+                else if (tapped(k#tabNext, frame)) WorldSaves.moveTab(1, w)
+                else if (tapped(k#remove, frame)) WorldSaves.deleteHere(w)
+                else if (tapped(k#prev, frame)) WorldSaves.moveSlotCursor(-Layout.slotColumns(fitOf(res, frame)), w)
+                else if (tapped(k#next, frame)) WorldSaves.moveSlotCursor(Layout.slotColumns(fitOf(res, frame)), w)
+                else if (tapped(k#left, frame)) WorldSaves.moveSlotCursor(-1, w)
+                else if (tapped(k#right, frame)) WorldSaves.moveSlotCursor(1, w)
+                else if (tapped(k#confirm, frame)) WorldSaves.chooseHere(res, w)
+                else w
+        }
+
+    /// 設定: ↑↓ で行、←→ で値、決定で 2 つから選ぶ行を反対側へ・「初期設定に戻す」を押す。
+    /// スライダーの帯をクリックするとその位置の値、2 つから選ぶ行はクリックした側になる。
+    /// スライダーは押したまま（指なら横へなぞったまま）動かすと、帯の上の位置に付いて値が動く。
+    /// 離すまでは最初に掴んだスライダーだけが動く（縦にずれて隣の行に入っても、隣は動かさない）。
+    def settingsInput(res: Res.Res, frame: App.Frame, back: Bool, current: World.Setting, w: World.World): World.World \ Emit[World.Event] =
+        let rows = WorldSettings.settings();
+        let hovered = Layout.hitOf(List.length(rows), Layout.settingRow(fitOf(res, frame)), frame#cursor)
+            |> Option.flatMap(i -> List.nth(i, rows) |> Option.map(s -> (i, s)));
+        let fit = fitOf(res, frame);
+        let grabbed = (i, slider) -> { grab = World.Grab.Slider(i) | dragSlider(res, i, slider, frame, WorldSettings.pointSetting(World.Setting.Slider(slider), w)) };
+        match (frame#mouseDown, w#grab, hovered) {
+            case (true, World.Grab.Slider(i), _) =>
+                match List.nth(i, rows) {
+                    case Some(World.Setting.Slider(slider)) => grabbed(i, slider)
+                    case _                                  => w
+                }
+            case (true, World.Grab.Free, Some((i, World.Setting.Slider(slider)))) if Layout.contains(Layout.settingBarReach(fit, i), frame#cursor) =>
+                grabbed(i, slider)
+            case _ =>
+                let next = if (frame#mouseDown) World.Grab.Other else World.Grab.Free;
+                let w1 = if (w#grab == next) w else { grab = next | w };
+                settingsRest(res, frame, back, current, hovered, w1)
+        }
+
+    /// 掴んでいない時の設定の入力（クリック・ホバー・キー）。
+    def settingsRest(res: Res.Res, frame: App.Frame, back: Bool, current: World.Setting, hovered: Option[(Int32, World.Setting)], w: World.World): World.World \ Emit[World.Event] =
+        let k = keysOf(res);
+        match hovered {
+            // WhyNot: 押した行へカーソルを寄せる音を、押した結果の音と重ねない — 「初期設定に戻す」は寄せる音と確認のウィンドウの音が同じコマに 2 つ鳴る。
+            case Some((i, setting)) if frame#mouseClicked => clickSetting(res, i, setting, frame, { panel = World.Panel.Settings(setting) | w })
+            case Some((_, setting)) if frame#mouseMoved   => WorldSettings.pointSetting(setting, w)
+            case _ =>
+                if (back) World.closePanel(w)
+                else if (tapped(k#prev, frame)) WorldSettings.moveSetting(-1, w)
+                else if (tapped(k#next, frame)) WorldSettings.moveSetting(1, w)
+                else if (tapped(k#left, frame)) WorldSettings.adjust(res, current, -1, w)
+                else if (tapped(k#right, frame)) WorldSettings.adjust(res, current, 1, w)
+                else if (tapped(k#confirm, frame)) WorldSettings.activate(current, w)
+                else w
+        }
+
+    /// 掴んだ i 行目のスライダーを、カーソルの横の位置の値にする（縦の位置は見ない）。
+    def dragSlider(res: Res.Res, i: Int32, slider: World.Slider, frame: App.Frame, w: World.World): World.World \ Emit[World.Event] =
+        let range = WorldSettings.rangeOf(slider, res#kind);
+        let bar = Layout.settingBar(fitOf(res, frame), i);
+        let t = Float64.max(0.0, Float64.min(1.0, (frame#cursor#x - bar#position#x) / bar#size#x));
+        WorldSettings.withLevel(res, slider, range#min + Float64.round((t * (range#max - range#min)) / range#step) * range#step, w)
+
+    /// 設定の行 i をクリックした: スライダーは帯の位置の値、2 つから選ぶ行は押した側、押す行はボタンの上なら確認のウィンドウ。
+    def clickSetting(res: Res.Res, i: Int32, setting: World.Setting, frame: App.Frame, w: World.World): World.World \ Emit[World.Event] =
+        match setting {
+            case World.Setting.Slider(slider) =>
+                let range = WorldSettings.rangeOf(slider, res#kind);
+                let fit = fitOf(res, frame);
+                let bar = Layout.settingBar(fit, i);
+                let reach = Layout.settingBarReach(fit, i);
+                if (not Layout.contains(reach, frame#cursor)) w
+                else {
+                    let t = Float64.max(0.0, Float64.min(1.0, (frame#cursor#x - bar#position#x) / bar#size#x));
+                    WorldSettings.withLevel(res, slider, range#min + Float64.round((t * (range#max - range#min)) / range#step) * range#step, w)
+                }
+            case World.Setting.Pair(pair) =>
+                match Layout.sideAt(side -> Layout.settingSide(fitOf(res, frame), i, side), frame#cursor) {
+                    case Some(side) => WorldSettings.withSide(pair, side, w)
+                    case None       => w
+                }
+            case World.Setting.Reset =>
+                if (Layout.contains(Layout.settingAction(fitOf(res, frame), i), frame#cursor)) WorldSettings.activate(setting, w) else w
+        }
+
+    // ── 音 ──
+
+    /// 返事の音（project.json の sounds の論理名）。ui_ は決定やカーソルへの返事、se_ はシナリオの <<se>> と入退室とポコッ。
+    /// 送り・すぐ送信は鳴らさない（発言がチャットに入った時のポコッ 1 回にまとめる。押した音とポコッが二重に鳴らない）。
+    pub def soundOf(event: World.Event): Option[String] = match event {
+        case World.Event.Paged    => None
+        case World.Event.Revealed => None
+        case World.Event.Posted   => Some("se_post")
+        case World.Event.Moved    => Some("ui_cursor")
+        case World.Event.Opened   => Some("ui_open")
+        case World.Event.Closed   => Some("ui_open")
+        case World.Event.Saved    => Some("ui_save")
+        case World.Event.Loaded   => Some("ui_save")
+        case World.Event.Rolled   => Some("ui_page")
+        case World.Event.Cue(name) => Some(name)
+    }
+
+    /// 1 フレームの一発の音（このフレームに溜まった出来事から）。missing = まだ届いていない音の名前。
+    pub def sounds(missing: Set[String], ws: { before = World.World, after = World.World }): List[String] =
+        soundsOf(missing, Emit.since(ws#before#events, ws#after#events))
+
+    /// 出来事の列から鳴らす一発の音。まだ届いていない音（missing）は待たず、鳴らさずに進む。同じ音は 1 フレームに 1 回まで
+    /// （スキップが何行も流しても、ポコッが束になって割れない）。
+    pub def soundsOf(missing: Set[String], events: List[World.Event]): List[String] =
+        events |> List.filterMap(soundOf) |> List.filter(name -> not Set.memberOf(name, missing)) |> List.distinct
+
+    /// 鳴り続ける環境音（舞台の環境音の層。amb_<名前> を層の音量で重ねる）。全体の音量はミキサーのバスが決める。
+    pub def ambience(res: Res.Res, w: World.World): List[App.Sustain] =
+        World.stageOf(res, w)#ambience |> List.map(layer -> { name = Stage.ambienceSound(layer#name), volume = layer#volume, pitch = 1.0 })
+
+    /// 音の通り道: novel.mixer.json のバスに、設定の音量（全体 × 環境音 / 効果音）を掛ける。loud のバスは Doc の音量を上限として、全体 × 環境音を掛ける。
+    /// 画面や確認のウィンドウを開いている間は snapshot「panel」（環境音を籠もらせる）。
+    pub def mixerOf(res: Res.Res, w: World.World): AudioMixer.Mixer =
+        let c = Saves.configOf(w#saves);
+        let ceiling = AudioMixer.getBus(res#mixer, "loud")#volume;
+        let base = res#mixer |> AudioMixer.withBusVolume("ambience", c#masterVolume * c#ambienceVolume)
+                           |> AudioMixer.withBusVolume("se", c#masterVolume * c#seVolume)
+                           |> AudioMixer.withBusVolume("loud", ceiling * c#masterVolume * c#ambienceVolume);
+        if (World.isFree(w)) base else AudioMixer.withSnapshot("panel", base)
+
+    // ── 後回しの素材を解く量（ブラウザ版。App.withDecodeBudget） ──
+
+    /// このコマに、届いた後回しの絵を登録してよい量。素材を待っている間（黒へ重ねる・黒のまま・黒から戻す）は Covered(50)、
+    /// 打っている途中とクレジット（流れている）は Paused、出し終えた後・タイトル・画面を開いている間は Idle(4)。
+    // WhyNot: 地の文の層が出入りする間を Covered にしない — 見えている層の重なりが登録の止まりで引っかかる。
+    pub def decodeBudget(h: Resources.With[Res.Res, World.World]): LoadProgress.DecodeBudget =
+        let w = h#world;
+        match w#scene {
+            case World.Scene.Title(_)      => LoadProgress.DecodeBudget.Idle(idleMs())
+            case World.Scene.Credits(_, _) => LoadProgress.DecodeBudget.Paused
+            case World.Scene.Reading(r)    =>
+                if (Option.nonEmpty(r#hold)) LoadProgress.DecodeBudget.Covered(coveredMs())
+                else if (World.isFree(w) and not Page.isDone(r#page)) LoadProgress.DecodeBudget.Paused
+                else LoadProgress.DecodeBudget.Idle(idleMs())
+        }
+
+    /// 画面が動いて見えている間に、1 コマで登録に使ってよい ms（1 本の道は必ず通る）。
+    def idleMs(): Float64 = 4.0
+
+    /// 画面が黒い間に、1 コマで登録に使ってよい ms。
+    def coveredMs(): Float64 = 50.0
+
+    // ── Doc の読み込み・読み直し（watchFile / F1） ──
+
+    pub def mixerPath(): String = "assets/novel.mixer.json"
+
+    /// 起動時と描き出しとテストが同じ形で読む描く元（Doc とシナリオ）。
+    pub def loadRes(): Res.Res \ Fs.FileRead =
+        { story = StoryDoc.load(StoryDoc.path()),
+          kind = KindDoc.load(KindDoc.path()),
+          pace = PaceDoc.load(PaceDoc.path()),
+          theme = ThemeDoc.load(ThemeDoc.path()),
+          art = Art.load(Art.path()),
+          credits = CreditsDoc.load(CreditsDoc.path()),
+          keys = KeysDoc.load(KeysDoc.path()),
+          smallScreen = SmallScreenDoc.load(SmallScreenDoc.path()),
+          portrait = PortraitDoc.load(PortraitDoc.path()),
+          mixer = AudioMixerDoc.load(AudioMixer.defaults(), mixerPath()),
+          dialogue = Talk.load(),
+          missing = Set.empty() }
+
+    /// Doc の一覧表(DocTable)。watchFile(保存即反映)・F1 の一括リロード・Studio へ名乗る「表示中」の 3 つは、
+    /// どれもこの 1 枚から導出する。docId は project.json の editor.resources[] の id と同じ物。
+    /// 読み直すのは描く元（Res）で、World を収め直すのはシナリオの行だけ（WorldRead.settleDialogue）。
+    pub def docTable(): List[DocTable.Entry[Resources.With[Res.Res, World.World]]] =
+        let unchanged = (_, w) -> w;
+        Resources.reloadRow("story", StoryDoc.path(), res -> Res.withStory(StoryDoc.load(StoryDoc.path()), res), unchanged)
+            :: Resources.reloadUnnamedRow(Talk.dialoguePath(), res -> Res.withDialogue(Talk.load(), res), WorldRead.settleDialogue)
+            :: (Resources.reloadRow("kind", KindDoc.path(), res -> Res.withKind(KindDoc.load(KindDoc.path()), res), unchanged)
+                |> DocTable.withActiveWhen(Resources.read((_, w) -> World.isReading(w))))
+            :: (Resources.reloadRow("pace", PaceDoc.path(), res -> Res.withPace(PaceDoc.load(PaceDoc.path()), res), unchanged)
+                |> DocTable.withActiveWhen(Resources.read((_, w) -> World.isReading(w))))
+            :: Resources.reloadRow("theme", ThemeDoc.path(), res -> Res.withTheme(ThemeDoc.load(ThemeDoc.path()), res), unchanged)
+            :: Resources.reloadRow("art", Art.path(), res -> Res.withArtDoc(Art.load(Art.path()), res), unchanged)
+            :: (Resources.reloadRow("credits", CreditsDoc.path(), res -> Res.withCredits(CreditsDoc.load(CreditsDoc.path()), res), unchanged)
+                |> DocTable.withActiveWhen(Resources.read((_, w) -> World.isCredits(w))))
+            :: Resources.reloadRow("keys", KeysDoc.path(), res -> Res.withKeys(KeysDoc.load(KeysDoc.path()), res), unchanged)
+            :: Resources.reloadRow("small", SmallScreenDoc.path(), res -> Res.withSmallScreen(SmallScreenDoc.load(SmallScreenDoc.path()), res), unchanged)
+            :: Resources.reloadRow("portrait", PortraitDoc.path(), res -> Res.withPortrait(PortraitDoc.load(PortraitDoc.path()), res), unchanged)
+            :: Resources.reloadRow("mixer", mixerPath(), res -> Res.withMixer(AudioMixerDoc.load(AudioMixer.defaults(), mixerPath()), res), unchanged)
+            :: Nil
+}

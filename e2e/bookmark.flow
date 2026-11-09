@@ -1,0 +1,11 @@
+# チャットの途中でクイックセーブし、先へ読んでからクイックロードすると、同じ行に戻り、チャットの履歴も同じ数に作り直される。
+start title
+tap confirm
+drive reader until posts>=6 max 120
+tap quickSave
+drive reader until posts>=10 max 120
+tap quickLoad
+expect ask=QuickLoad
+tap left                               # 「はい」へ
+tap confirm
+expect panel=Closed&talk=Chat&posts=6

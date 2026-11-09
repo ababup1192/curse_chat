@@ -1,0 +1,156 @@
+{
+  "//": "novel.small.json の形の宣言（Studio の sections 方言）。小さい画面の時だけ使う字と押せる物の大きさ。置き場所はコード（src/Layout.flix）。既定は src/SmallScreenDoc.flix の defaults() が正。",
+  "version": 2,
+  "sections": {
+    "titleItemTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "タイトルのメニューの字（px）",
+      "group": "タイトル",
+      "order": 1,
+      "min": 14,
+      "max": 48,
+      "default": 28.0
+    },
+    "titleItemHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "タイトルのメニューの 1 つの高さ（px）",
+      "group": "タイトル",
+      "order": 2,
+      "min": 32,
+      "max": 80,
+      "default": 58.0
+    },
+    "buttonTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "見出しのクイックメニューの字（px）",
+      "group": "チャット",
+      "order": 3,
+      "min": 10,
+      "max": 28,
+      "default": 17.0
+    },
+    "buttonHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "見出しの高さ（クイックメニューを押せる高さ・px）",
+      "group": "チャット",
+      "order": 4,
+      "min": 24,
+      "max": 80,
+      "default": 58.0
+    },
+    "chatBodySize": {
+      "kind": "field",
+      "type": "float",
+      "label": "チャットの本文の字（px）",
+      "group": "チャット",
+      "order": 5,
+      "min": 12,
+      "max": 36,
+      "default": 21.0
+    },
+    "chatNameSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "チャットの名前の字（px）",
+      "group": "チャット",
+      "order": 6,
+      "min": 12,
+      "max": 36,
+      "default": 20.0
+    },
+    "thoughtSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "地の文の字（px）",
+      "group": "チャット",
+      "order": 7,
+      "min": 14,
+      "max": 44,
+      "default": 27.0
+    },
+    "backTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "画面の右上の「戻る」の字（px）",
+      "group": "画面",
+      "order": 8,
+      "min": 10,
+      "max": 32,
+      "default": 20.0
+    },
+    "backHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "画面の右上の「戻る」の高さ（px）",
+      "group": "画面",
+      "order": 9,
+      "min": 24,
+      "max": 80,
+      "default": 58.0
+    },
+    "tabTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "セーブ・ロードのタブの字（px）",
+      "group": "画面",
+      "order": 10,
+      "min": 10,
+      "max": 32,
+      "default": 20.0
+    },
+    "tabHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "セーブ・ロードのタブの高さ（px）",
+      "group": "画面",
+      "order": 11,
+      "min": 24,
+      "max": 80,
+      "default": 58.0
+    },
+    "settingTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "設定の行の字（px）",
+      "group": "画面",
+      "order": 12,
+      "min": 10,
+      "max": 32,
+      "default": 18.0
+    },
+    "settingRowHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "設定の行の高さ（px）",
+      "group": "画面",
+      "order": 13,
+      "min": 24,
+      "max": 80,
+      "default": 58.0
+    },
+    "askButtonTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "確認のウィンドウのはい・いいえの字（px）",
+      "group": "確認",
+      "order": 14,
+      "min": 10,
+      "max": 36,
+      "default": 22.0
+    },
+    "askButtonHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "確認のウィンドウのはい・いいえの高さ（px）",
+      "group": "確認",
+      "order": 15,
+      "min": 24,
+      "max": 80,
+      "default": 58.0
+    }
+  }
+}

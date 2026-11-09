@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "note": "クレジットに流す行（上から順）。style は heading（見出し）/ body（本文）/ small（出典の URL など）/ gap（空き）。音・絵・フォントの表記は CREDITS.md と同じ物を置く。",
+  "rows": [
+    {
+      "text": "呪いのチャット",
+      "style": "heading"
+    },
+    {
+      "text": "",
+      "style": "gap"
+    },
+    {
+      "text": "シナリオ",
+      "style": "body"
+    },
+    {
+      "text": "呪いのチャット（依頼主の設計書より）",
+      "style": "small"
+    },
+    {
+      "text": "",
+      "style": "gap"
+    },
+    {
+      "text": "効果音",
+      "style": "body"
+    },
+    {
+      "text": "ポン・ピロン・ピチャッ — 効果音ラボ",
+      "style": "small"
+    },
+    {
+      "text": "https://soundeffect-lab.info/",
+      "style": "small"
+    },
+    {
+      "text": "",
+      "style": "gap"
+    },
+    {
+      "text": "環境音と効果音（freesound / CC0 1.0）",
+      "style": "body"
+    },
+    {
+      "text": "TV Static — Jace",
+      "style": "small"
+    },
+    {
+      "text": "濡れたタイルを裸足で歩く足音 — SpliceSound",
+      "style": "small"
+    },
+    {
+      "text": "木の床に倒れる音 — Breviceps",
+      "style": "small"
+    },
+    {
+      "text": "マイクのハウリング — JavierSerrat",
+      "style": "small"
+    },
+    {
+      "text": "静かな部屋のホワイトノイズ — Littleboot",
+      "style": "small"
+    },
+    {
+      "text": "切り出し・音量調整・ループ加工をしています",
+      "style": "small"
+    },
+    {
+      "text": "",
+      "style": "gap"
+    },
+    {
+      "text": "絵",
+      "style": "body"
+    },
+    {
+      "text": "ChatGPT（OpenAI の画像生成）で生成",
+      "style": "small"
+    },
+    {
+      "text": "字と枠はエンジンの図形とシェーダーで描画",
+      "style": "small"
+    },
+    {
+      "text": "",
+      "style": "gap"
+    },
+    {
+      "text": "フォント",
+      "style": "body"
+    },
+    {
+      "text": "M PLUS Rounded 1c — The Rounded M+ Project Authors（SIL OFL 1.1）",
+      "style": "small"
+    },
+    {
+      "text": "しっぽり明朝 — The Shippori Mincho Project Authors（SIL OFL 1.1）",
+      "style": "small"
+    },
+    {
+      "text": "",
+      "style": "gap"
+    },
+    {
+      "text": "エンジン",
+      "style": "body"
+    },
+    {
+      "text": "flix_game_engine",
+      "style": "small"
+    },
+    {
+      "text": "",
+      "style": "gap"
+    }
+  ]
+}

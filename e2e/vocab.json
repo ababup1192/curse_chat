@@ -1,0 +1,49 @@
+{
+  "verbs": ["start", "tap", "hold", "release", "wait", "until", "drive", "expect", "mark", "run", "reload", "request", "close", "rewind"],
+  "settings": ["fps", "ready"],
+  "options": {},
+  "roles": ["confirm", "back", "prev", "next", "left", "right", "log", "auto", "skip", "rollback", "quickSave", "quickLoad", "tabPrev", "tabNext", "remove"],
+  "probes": [
+    {"name": "phase", "kind": "text", "doc": "場面（Title・Reading・Credits）"},
+    {"name": "panel", "kind": "text", "doc": "開いている画面（Closed・Log・SaveSlots・LoadSlots・Settings・Menu）"},
+    {"name": "ask", "kind": "text", "doc": "確認のウィンドウで尋ねている事（無ければ空。字の間は詰める。Load(Numbered(1),0)・ToTitle・Quit など）"},
+    {"name": "tab", "kind": "text", "doc": "セーブ・ロードの画面の今のページ（Auto・Quick・Numbered(1) など。画面が閉じていれば空）"},
+    {"name": "logSize", "kind": "num", "doc": "バックログの行の数"},
+    {"name": "talk", "kind": "text", "doc": "開いているシナリオのノード（閉じていれば空）"},
+    {"name": "talkLine", "kind": "text", "doc": "今出している行のシナリオの行（ファイル:行）"},
+    {"name": "screen", "kind": "text", "doc": "画面（Chat・Tv・Dark）"},
+    {"name": "posts", "kind": "num", "doc": "チャットの履歴に入っている 3 人の発言の数"},
+    {"name": "layers", "kind": "num", "doc": "鳴らしている環境音の層の数"},
+    {"name": "thought", "kind": "flag", "doc": "今の行が地の文"},
+    {"name": "lineDone", "kind": "flag", "doc": "今の行を出し終えた"},
+    {"name": "cursor", "kind": "num", "doc": "一番手前のカーソルの番号（0 から。確認のウィンドウ → 画面 → タイトルの順に見る）"}
+  ],
+  "drives": [
+    {"name": "reader", "doc": "地の文を出し終えたら少し読んでから送る（発言は勝手に流れるので押さない。ウィンドウ・タイトル画面でも押さない）"}
+  ],
+  "starts": [
+    {"name": "title", "doc": "タイトル画面（起動の既定）", "args": {}},
+    {"name": "talk", "doc": "シナリオのノード（node。既定は最初の Station）の頭から読む所。line = .yarn の行番号を渡すとその行まで進めて出した所（Studio の会話のプレビュー・bin/fge talk goto）。$名前=値 でシナリオの変数をその値にして流す", "args": {}},
+    {"name": "shot:title", "doc": "ギャラリーの場面（gallery/title.png）", "args": {}},
+    {"name": "shot:chat", "doc": "ギャラリーの場面（gallery/chat.png）", "args": {}},
+    {"name": "shot:chat-kaabo", "doc": "ギャラリーの場面（gallery/chat-kaabo.png）", "args": {}},
+    {"name": "shot:join", "doc": "ギャラリーの場面（gallery/join.png）", "args": {}},
+    {"name": "shot:thought", "doc": "ギャラリーの場面（gallery/thought.png）", "args": {}},
+    {"name": "shot:glitch", "doc": "ギャラリーの場面（gallery/glitch.png）", "args": {}},
+    {"name": "shot:chill", "doc": "ギャラリーの場面（gallery/chill.png）", "args": {}},
+    {"name": "shot:tv", "doc": "ギャラリーの場面（gallery/tv.png）", "args": {}},
+    {"name": "shot:tv-water", "doc": "ギャラリーの場面（gallery/tv-water.png）", "args": {}},
+    {"name": "shot:dark", "doc": "ギャラリーの場面（gallery/dark.png）", "args": {}},
+    {"name": "shot:scare", "doc": "ギャラリーの場面（gallery/scare.png）", "args": {}},
+    {"name": "shot:log", "doc": "ギャラリーの場面（gallery/log.png）", "args": {}},
+    {"name": "shot:save", "doc": "ギャラリーの場面（gallery/save.png）", "args": {}},
+    {"name": "shot:settings", "doc": "ギャラリーの場面（gallery/settings.png）", "args": {}},
+    {"name": "shot:credits", "doc": "ギャラリーの場面（gallery/credits.png）", "args": {}},
+    {"name": "shot:none-chat", "doc": "ギャラリーの場面（gallery/none-chat.png）", "args": {}},
+    {"name": "shot:none-thought", "doc": "ギャラリーの場面（gallery/none-thought.png）", "args": {}}
+  ],
+  "keys": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Digit0", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Up", "Down", "Left", "Right", "Enter", "Space", "Escape", "Tab", "Backspace", "Insert", "Delete", "PageUp", "PageDown", "Home", "End", "CapsLock", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Apostrophe", "Comma", "Minus", "Period", "Slash", "Semicolon", "Equal", "LeftBracket", "Backslash", "RightBracket", "GraveAccent", "LeftShift", "LeftCtrl", "LeftAlt", "LeftSuper", "RightShift", "RightCtrl", "RightAlt", "RightSuper", "Menu", "Numpad0", "Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6", "Numpad7", "Numpad8", "Numpad9", "NumpadDecimal", "NumpadDivide", "NumpadMultiply", "NumpadSubtract", "NumpadAdd", "NumpadEnter", "NumpadEqual"],
+  "ready": true,
+  "replies": true,
+  "fingerprint": true
+}

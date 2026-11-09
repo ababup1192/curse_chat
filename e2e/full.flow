@@ -1,0 +1,15 @@
+# タイトルから読み始め、チャット（3 人が入室し、発言は勝手に流れ、地の文は押して進める）→ テレビのニュース →
+# 真っ暗な画面と血文字 → クレジットまで。押すのは地の文だけ（drive reader）。
+start title
+tap confirm                            # タイトル → はじめから
+expect talk=Chat&screen=Chat
+drive reader until posts>=3 max 60     # 入室の後、発言が押さずに流れる
+expect posts>=3
+drive reader until thought&lineDone max 300   # 最初の地の文を出し終えた所で止まる（地の文は押すまで流れない）
+wait 2
+expect thought&lineDone
+mark thought
+drive reader until talk=News max 900   # 3 人が退出して、テレビへ
+expect screen=Tv&layers>=1
+drive reader until screen=Dark max 120
+drive reader until phase=Credits max 60

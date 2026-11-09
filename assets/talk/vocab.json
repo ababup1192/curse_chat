@@ -1,0 +1,10 @@
+{
+  "speakers": ["amanatsu", "kaabo", "kansai", "caster"],
+  "nodes": ["Chat"],
+  "tags": {
+    "gap": ["long", "longer"],
+    "glitch": [],
+    "impostor": []
+  },
+  "commands": ["chat", "tv", "dark", "join", "leave", "ambience", "silence", "se", "chill", "drops", "scare", "shake"]
+}

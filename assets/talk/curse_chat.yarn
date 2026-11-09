@@ -1,0 +1,175 @@
+// 『呪いのチャット』— 深夜のチャットで、友達が 1 人ずつ「別の何か」に入れ替わっていく短いホラー（Yarn Spinner の部分集合）。
+// 直したら bin/fge yarn build assets/talk（check が話し手・コマンド・タグ・ノードの名前を src/Talk.flix の語彙で止める）。
+// 本文は人の設計書（呪いのチャット(1).txt）の字のまま。誤字に見える所（dpうする・歩いれる 等）は崩れた発言として意図した物。
+//
+// 書き方:
+//   発言は「名前: 本文」（amanatsu / kaabo / kansai。呼び名と色は assets/novel.story.json と assets/novel.theme.json）。
+//   地の文（かーぼーの心の声）は話し手を書かない。チャットの上に画面を沈めて中央に出す。
+//   ニュースの字幕は caster:（チャットには出ない）。
+//   1 発言 = 1 行。発言は打ち終えて間（gap）が過ぎると勝手に流れ、地の文は押して進める。
+//   コマンド（引数の意味は src/Stage.flix の冒頭）:
+//     <<chat>> / <<tv caster|fallen|static>> / <<dark>>   画面をチャット・テレビ・真っ暗に替える
+//     <<join 名>> / <<leave 名>>                        入退室の行を流し、入退室の音を鳴らす
+//     <<ambience 名 音量>> / <<ambience 名 off>>        環境音の層を足す・音量を替える・止める（層は重なる）
+//     <<silence>>                                        環境音の層を全部すぐ止める
+//     <<se 名>>                                          効果音を 1 回
+//     <<chill 目標 秒>>                                  画面の冷え（0〜1）を秒かけて目標へ
+//     <<drops on|off>>                                   画面の内側の水滴
+//     <<scare 字>>                                       真っ暗な画面に血文字を一瞬だけ出す
+//     <<shake>>                                          画面を揺らす
+//     <<wait 秒>>                                        待つ（押しても飛ばない）
+//   タグ: #gap:long / #gap:longer = 発言の後の間を長く、#glitch = 字が震える、#impostor = この発言から話し手は偽物
+
+title: Chat
+---
+<<chat>>
+<<ambience room 0.25>>
+<<wait 1.2>>
+<<join amanatsu>>
+<<wait 0.8>>
+<<join kansai>>
+<<wait 1.2>>
+<<join kaabo>>
+<<wait 0.8>>
+amanatsu: おつおつ
+kansai: お疲れさん
+kaabo: お疲れ様でーす
+amanatsu: かーぼー入るの遅。また飯食いながら寝てたっしょ
+kaabo: 起きてましたー！ちょっと動画見てたら時間溶けただけですー
+kansai: それ寝てたやつやん！笑
+kansai: まあええわ、今日何するん？
+amanatsu: やっぱエペじゃない？
+kaabo: また？笑
+amanatsu: じゃあ何するの
+kaabo: ……エペ？笑
+kansai: いや変わっとらんやないかい！
+amanatsu: 要はエペやるってことね？
+kansai: せやな〜
+kaabo: りんごりらっぱ〜
+kansai: いや、急になんやねん！笑
+kaabo: 韻踏んでみた
+amanatsu: 踏めてる……のか？笑
+kaabo: まあまあ、いいじゃないですか
+kansai: ええけど笑
+amanatsu: てか関西、昨日ランクマでやらかしたべ
+kansai: ウッ、その話はNGでお願いシャス……
+kaabo: あ、Twitterで晒されてたやつだ笑
+kansai: 晒すなて！味方が強すぎてつい突っ込みすぎたんや！
+amanatsu: はいはい、言い訳おつー。今日はちゃんとカバーしてよね
+kansai: 任せとき。今日はクリプトでドローン飛ばしまくったるわ
+いつも通り休日の夜だった。
+気心の知れた大学の友達。
+1年以上時間が合う日を見つけてはゲームをしている。
+明日の1限の講義はサボろう。そんなくだらない話をしながら夜が更けていくはずだった。
+amanatsu: てか今度のゲームイベやる？
+kaabo: あ〜、やらないかも。推しいないし
+kansai: 俺はやるで〜
+amanatsu: 推しいたっけ
+kansai: おん、おるで！ #gap:longer
+始まりは、唐突だった。
+<<chill 0.3 4>>
+kansai: なんか変な音するんやけど
+kaabo: お隣さんの生活音じゃなくて？
+kansai: 絶対ちゃうわ。なんやろ、水の音みたいやな
+kansai: ピチャピチャって
+kansai: 歩いとるようにも聞こえる
+amanatsu: え〜何その音怖
+kansai: あ、消えたわ
+kaabo: えなんだったの？
+kansai: わかりません #impostor
+一瞬自分の目を疑った。違和感しかなかった。
+違和感の正体にはすぐに気づいてしまった。
+標準語が、無機質なのだ。あまりにも。
+……標準語？
+amanatsu: お前、だれ？
+kansai: 何を言っているのですか？オレはオレです
+kaabo: そうだよ甘夏。急にどうした？
+その違和感に気づきたくなかった。だから、いつものノリだと信じてとぼけたようなことを言う。
+その言葉の裏では、心臓がどくどくと鳴ってうるさかった。
+amanatsu: 関西は標準語使わない。絶対に
+amanatsu: なのにお前は標準語。だれ？
+<<leave kansai>>
+kaabo: なあ、あいつどうしたんだよ
+amanatsu: わかんない
+kaabo: ドッキリだよな…
+amanatsu: わかんない
+kaabo: これもしかしてヤバい？
+amanatsu: わかんない……
+kaabo: え、dpうするの
+amanatsu: あいつの部屋見に行く？
+kaabo: でも今外出禁止時間帯だし……
+amanatsu: まあドッキリならそろそろネタバラシするはず
+amanatsu: まて、水の音する
+kaabo: え……？
+amanatsu: さむい
+amanatsu: 歩いれる
+amanatsu: たすぇて
+amanatsu: こっちきたたたたたたたた #glitch
+kaabo: 大丈夫！？ #gap:long
+amanatsu: 問題ありません #impostor
+<<chill 0.6 4>>
+ああ、甘夏もだ。
+さっきまでパニックでまともに文字も打てていなかった人間が突然こんな無機質な文章送ってくるわけない。
+kaabo: また、偽物なのか…？
+<<leave amanatsu>>
+本能的に感じた。次は俺の番だと。
+二人がいなくなったことさえ信じられていなかった俺はパニックになり、その場から動けなくなってしまった。
+そうだ、きっとドッキリだよ。あいつらが俺をからかってるんだ。もう少ししたら戻ってくる。そうだそのはずだ。
+俺は震える手でチャットを打ち続けた。
+戻ってくることを信じて。
+kaabo: なあ嘘だろ？
+kaabo: じほんとはいるんだろ
+<<ambience water 0.25>>
+おかしい。手元が、異常に冷たい。
+気がつけば、フローリングの床がぐっしょりと濡れている。
+どこからか溢れ出した水が、俺の足元をひたひたと浸していた。
+冷たい。寒気が止まらない。指がかじかんで、うまくキーが叩けない。
+kaabo: もどってくるよんｓ #glitch
+kaabo: とるあえずけいさち #glitch
+<<se drip>>
+ピチャ……、ピチャ……。
+背後から、水浸しの足音が近づいてくる。
+振り返っちゃダメだ。振り返ったら、俺は――。
+kaabo: みずのおとがする #glitch
+kaabo: おれもおわるんだ #glitch
+kaabo: はやくけいさつ #glitch
+<<chill 0.9 2>>
+<<leave kaabo>>
+<<wait 2.5>>
+<<jump News>>
+===
+
+title: News
+---
+<<silence>>
+<<tv caster>>
+<<ambience static 0.35>>
+<<wait 1.5>>
+caster: ……続いてのニュースです
+caster: 本日午後8時頃、都内の学生アパートで、住人の男女3名が死亡しているのが発見されました
+caster: 3人はいずれも心肺停止の状態で、目立った外傷や持病はなく、警察は急性心不全とみて調べています
+caster: また、3人は死亡直前までネット上でチャットをしていたとみられます
+<<ambience water 0.5>>
+caster: 現場の部屋はいずれも、玄関から遺体の発見場所まで、大量の水が滴り落ちたような跡があり……警察は発言の因果関係を、調べて、いま……っ、あ、がはっ……！ #glitch
+<<se thud>>
+<<tv fallen>>
+<<shake>>
+<<se howl>>
+<<wait 2.0>>
+<<drops on>>
+<<ambience static_loud 1.0>>
+<<ambience static off>>
+<<wait 3.5>>
+<<jump Behind>>
+===
+
+title: Behind
+---
+<<silence>>
+<<drops off>>
+<<dark>>
+<<wait 4>>
+<<scare ウシロニイルヨ>>
+<<se behind>>
+<<wait 3>>
+===

@@ -1,0 +1,18 @@
+{
+  "//": "chat.art.json の形の宣言（Studio の sections 方言）。既定は src/Art.flix の defaults() が正。",
+  "version": 2,
+  "sections": {
+    "backdrop": {
+      "kind": "field",
+      "type": {
+        "enum": [
+          "room",
+          "none"
+        ]
+      },
+      "label": "地の文の層の奥（room = 部屋の絵・none = 背景なしで UI を沈める）",
+      "order": 1,
+      "default": "room"
+    }
+  }
+}

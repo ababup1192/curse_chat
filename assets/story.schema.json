@@ -1,0 +1,292 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "画面の言葉（novel.story.json）",
+  "description": "シナリオの外で画面に出す言葉と話し手の呼び名。発言・地の文・字幕はシナリオ assets/talk/curse_chat.yarn。",
+  "type": "object",
+  "required": [
+    "version"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "description": "Doc の形の版。いまは 2"
+    },
+    "note": {
+      "type": "string",
+      "description": "人間と AI のためのメモ（ゲームは読まない）"
+    },
+    "title": {
+      "type": "string",
+      "description": "タイトル画面の題"
+    },
+    "warning": {
+      "type": "string",
+      "description": "タイトル画面の音の注意（ヘッドホン推奨など）"
+    },
+    "hint": {
+      "type": "string",
+      "description": "タイトル画面の下の操作の案内"
+    },
+    "titleAmbience": {
+      "type": "string",
+      "description": "タイトル画面の環境音（amb_<名前>。空なら鳴らさない）"
+    },
+    "names": {
+      "type": "object",
+      "description": "話し手の id（src/Talk.flix の Speaker）→ 呼び名",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "labels": {
+      "type": "object",
+      "description": "言葉の鍵（src/StoryDoc.flix の Label）→ 言葉。無い鍵は既定の言葉で出る",
+      "properties": {
+        "newGame": {
+          "type": "string"
+        },
+        "continue": {
+          "type": "string"
+        },
+        "loadGame": {
+          "type": "string"
+        },
+        "settings": {
+          "type": "string"
+        },
+        "credits": {
+          "type": "string"
+        },
+        "quit": {
+          "type": "string"
+        },
+        "rollback": {
+          "type": "string"
+        },
+        "log": {
+          "type": "string"
+        },
+        "auto": {
+          "type": "string"
+        },
+        "skip": {
+          "type": "string"
+        },
+        "quickSave": {
+          "type": "string"
+        },
+        "quickLoad": {
+          "type": "string"
+        },
+        "save": {
+          "type": "string"
+        },
+        "load": {
+          "type": "string"
+        },
+        "config": {
+          "type": "string"
+        },
+        "toTitle": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "textChannels": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "channelNews": {
+          "type": "string"
+        },
+        "channelTalk": {
+          "type": "string"
+        },
+        "members": {
+          "type": "string"
+        },
+        "online": {
+          "type": "string"
+        },
+        "offline": {
+          "type": "string"
+        },
+        "today": {
+          "type": "string"
+        },
+        "joined": {
+          "type": "string"
+        },
+        "left": {
+          "type": "string"
+        },
+        "typing": {
+          "type": "string"
+        },
+        "inputHint": {
+          "type": "string"
+        },
+        "newsTitle": {
+          "type": "string"
+        },
+        "live": {
+          "type": "string"
+        },
+        "placeChat": {
+          "type": "string"
+        },
+        "placeNews": {
+          "type": "string"
+        },
+        "placeDark": {
+          "type": "string"
+        },
+        "saveTitle": {
+          "type": "string"
+        },
+        "loadTitle": {
+          "type": "string"
+        },
+        "logTitle": {
+          "type": "string"
+        },
+        "settingsTitle": {
+          "type": "string"
+        },
+        "back": {
+          "type": "string"
+        },
+        "tabAuto": {
+          "type": "string"
+        },
+        "tabQuick": {
+          "type": "string"
+        },
+        "emptySlot": {
+          "type": "string"
+        },
+        "newBadge": {
+          "type": "string"
+        },
+        "slotsHint": {
+          "type": "string"
+        },
+        "logHint": {
+          "type": "string"
+        },
+        "groupText": {
+          "type": "string"
+        },
+        "groupSound": {
+          "type": "string"
+        },
+        "textSpeed": {
+          "type": "string"
+        },
+        "autoWait": {
+          "type": "string"
+        },
+        "skipScope": {
+          "type": "string"
+        },
+        "skipReadOnly": {
+          "type": "string"
+        },
+        "skipEverything": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "windowMode": {
+          "type": "string"
+        },
+        "fullscreenMode": {
+          "type": "string"
+        },
+        "masterVolume": {
+          "type": "string"
+        },
+        "ambienceVolume": {
+          "type": "string"
+        },
+        "seVolume": {
+          "type": "string"
+        },
+        "reset": {
+          "type": "string"
+        },
+        "preview": {
+          "type": "string"
+        },
+        "yes": {
+          "type": "string"
+        },
+        "no": {
+          "type": "string"
+        },
+        "askOverwrite": {
+          "type": "string"
+        },
+        "askDelete": {
+          "type": "string"
+        },
+        "askLoad": {
+          "type": "string"
+        },
+        "askJump": {
+          "type": "string"
+        },
+        "askToTitle": {
+          "type": "string"
+        },
+        "askQuit": {
+          "type": "string"
+        },
+        "askReset": {
+          "type": "string"
+        },
+        "lostNote": {
+          "type": "string"
+        },
+        "saved": {
+          "type": "string"
+        },
+        "quickSaved": {
+          "type": "string"
+        },
+        "loaded": {
+          "type": "string"
+        },
+        "deleted": {
+          "type": "string"
+        },
+        "resetDone": {
+          "type": "string"
+        },
+        "noSave": {
+          "type": "string"
+        },
+        "noQuickSave": {
+          "type": "string"
+        },
+        "noRollback": {
+          "type": "string"
+        },
+        "menu": {
+          "type": "string"
+        },
+        "tapHint": {
+          "type": "string"
+        },
+        "logTapHint": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

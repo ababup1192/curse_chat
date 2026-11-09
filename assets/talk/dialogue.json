@@ -1,0 +1,997 @@
+{
+  "version": 1,
+  "note": "bin/fge yarn build が assets/talk/curse_chat.yarn から書いた木。手で直さない（.yarn を直して build する）",
+  "vocab": "assets/talk/vocab.json",
+  "files": [
+    "assets/talk/curse_chat.yarn"
+  ],
+  "nodes": [
+    {
+      "title": "Chat",
+      "file": "assets/talk/curse_chat.yarn",
+      "line": 23,
+      "headers": [],
+      "body": [
+        {
+          "kind": "command",
+          "line": 25,
+          "name": "chat"
+        },
+        {
+          "kind": "command",
+          "line": 26,
+          "name": "ambience",
+          "args": [
+            "room",
+            "0.25"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 27,
+          "name": "wait",
+          "args": [
+            "1.2"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 28,
+          "name": "join",
+          "args": [
+            "amanatsu"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 29,
+          "name": "wait",
+          "args": [
+            "0.8"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 30,
+          "name": "join",
+          "args": [
+            "kansai"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 31,
+          "name": "wait",
+          "args": [
+            "1.2"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 32,
+          "name": "join",
+          "args": [
+            "kaabo"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 33,
+          "name": "wait",
+          "args": [
+            "0.8"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 34,
+          "speaker": "amanatsu",
+          "text": "おつおつ"
+        },
+        {
+          "kind": "line",
+          "line": 35,
+          "speaker": "kansai",
+          "text": "お疲れさん"
+        },
+        {
+          "kind": "line",
+          "line": 36,
+          "speaker": "kaabo",
+          "text": "お疲れ様でーす"
+        },
+        {
+          "kind": "line",
+          "line": 37,
+          "speaker": "amanatsu",
+          "text": "かーぼー入るの遅。また飯食いながら寝てたっしょ"
+        },
+        {
+          "kind": "line",
+          "line": 38,
+          "speaker": "kaabo",
+          "text": "起きてましたー！ちょっと動画見てたら時間溶けただけですー"
+        },
+        {
+          "kind": "line",
+          "line": 39,
+          "speaker": "kansai",
+          "text": "それ寝てたやつやん！笑"
+        },
+        {
+          "kind": "line",
+          "line": 40,
+          "speaker": "kansai",
+          "text": "まあええわ、今日何するん？"
+        },
+        {
+          "kind": "line",
+          "line": 41,
+          "speaker": "amanatsu",
+          "text": "やっぱエペじゃない？"
+        },
+        {
+          "kind": "line",
+          "line": 42,
+          "speaker": "kaabo",
+          "text": "また？笑"
+        },
+        {
+          "kind": "line",
+          "line": 43,
+          "speaker": "amanatsu",
+          "text": "じゃあ何するの"
+        },
+        {
+          "kind": "line",
+          "line": 44,
+          "speaker": "kaabo",
+          "text": "……エペ？笑"
+        },
+        {
+          "kind": "line",
+          "line": 45,
+          "speaker": "kansai",
+          "text": "いや変わっとらんやないかい！"
+        },
+        {
+          "kind": "line",
+          "line": 46,
+          "speaker": "amanatsu",
+          "text": "要はエペやるってことね？"
+        },
+        {
+          "kind": "line",
+          "line": 47,
+          "speaker": "kansai",
+          "text": "せやな〜"
+        },
+        {
+          "kind": "line",
+          "line": 48,
+          "speaker": "kaabo",
+          "text": "りんごりらっぱ〜"
+        },
+        {
+          "kind": "line",
+          "line": 49,
+          "speaker": "kansai",
+          "text": "いや、急になんやねん！笑"
+        },
+        {
+          "kind": "line",
+          "line": 50,
+          "speaker": "kaabo",
+          "text": "韻踏んでみた"
+        },
+        {
+          "kind": "line",
+          "line": 51,
+          "speaker": "amanatsu",
+          "text": "踏めてる……のか？笑"
+        },
+        {
+          "kind": "line",
+          "line": 52,
+          "speaker": "kaabo",
+          "text": "まあまあ、いいじゃないですか"
+        },
+        {
+          "kind": "line",
+          "line": 53,
+          "speaker": "kansai",
+          "text": "ええけど笑"
+        },
+        {
+          "kind": "line",
+          "line": 54,
+          "speaker": "amanatsu",
+          "text": "てか関西、昨日ランクマでやらかしたべ"
+        },
+        {
+          "kind": "line",
+          "line": 55,
+          "speaker": "kansai",
+          "text": "ウッ、その話はNGでお願いシャス……"
+        },
+        {
+          "kind": "line",
+          "line": 56,
+          "speaker": "kaabo",
+          "text": "あ、Twitterで晒されてたやつだ笑"
+        },
+        {
+          "kind": "line",
+          "line": 57,
+          "speaker": "kansai",
+          "text": "晒すなて！味方が強すぎてつい突っ込みすぎたんや！"
+        },
+        {
+          "kind": "line",
+          "line": 58,
+          "speaker": "amanatsu",
+          "text": "はいはい、言い訳おつー。今日はちゃんとカバーしてよね"
+        },
+        {
+          "kind": "line",
+          "line": 59,
+          "speaker": "kansai",
+          "text": "任せとき。今日はクリプトでドローン飛ばしまくったるわ"
+        },
+        {
+          "kind": "line",
+          "line": 60,
+          "text": "いつも通り休日の夜だった。"
+        },
+        {
+          "kind": "line",
+          "line": 61,
+          "text": "気心の知れた大学の友達。"
+        },
+        {
+          "kind": "line",
+          "line": 62,
+          "text": "1年以上時間が合う日を見つけてはゲームをしている。"
+        },
+        {
+          "kind": "line",
+          "line": 63,
+          "text": "明日の1限の講義はサボろう。そんなくだらない話をしながら夜が更けていくはずだった。"
+        },
+        {
+          "kind": "line",
+          "line": 64,
+          "speaker": "amanatsu",
+          "text": "てか今度のゲームイベやる？"
+        },
+        {
+          "kind": "line",
+          "line": 65,
+          "speaker": "kaabo",
+          "text": "あ〜、やらないかも。推しいないし"
+        },
+        {
+          "kind": "line",
+          "line": 66,
+          "speaker": "kansai",
+          "text": "俺はやるで〜"
+        },
+        {
+          "kind": "line",
+          "line": 67,
+          "speaker": "amanatsu",
+          "text": "推しいたっけ"
+        },
+        {
+          "kind": "line",
+          "line": 68,
+          "speaker": "kansai",
+          "text": "おん、おるで！",
+          "tags": [
+            {
+              "key": "gap",
+              "value": "longer"
+            }
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 69,
+          "text": "始まりは、唐突だった。"
+        },
+        {
+          "kind": "command",
+          "line": 70,
+          "name": "chill",
+          "args": [
+            "0.3",
+            "4"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 71,
+          "speaker": "kansai",
+          "text": "なんか変な音するんやけど"
+        },
+        {
+          "kind": "line",
+          "line": 72,
+          "speaker": "kaabo",
+          "text": "お隣さんの生活音じゃなくて？"
+        },
+        {
+          "kind": "line",
+          "line": 73,
+          "speaker": "kansai",
+          "text": "絶対ちゃうわ。なんやろ、水の音みたいやな"
+        },
+        {
+          "kind": "line",
+          "line": 74,
+          "speaker": "kansai",
+          "text": "ピチャピチャって"
+        },
+        {
+          "kind": "line",
+          "line": 75,
+          "speaker": "kansai",
+          "text": "歩いとるようにも聞こえる"
+        },
+        {
+          "kind": "line",
+          "line": 76,
+          "speaker": "amanatsu",
+          "text": "え〜何その音怖"
+        },
+        {
+          "kind": "line",
+          "line": 77,
+          "speaker": "kansai",
+          "text": "あ、消えたわ"
+        },
+        {
+          "kind": "line",
+          "line": 78,
+          "speaker": "kaabo",
+          "text": "えなんだったの？"
+        },
+        {
+          "kind": "line",
+          "line": 79,
+          "speaker": "kansai",
+          "text": "わかりません",
+          "tags": [
+            {
+              "key": "impostor",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 80,
+          "text": "一瞬自分の目を疑った。違和感しかなかった。"
+        },
+        {
+          "kind": "line",
+          "line": 81,
+          "text": "違和感の正体にはすぐに気づいてしまった。"
+        },
+        {
+          "kind": "line",
+          "line": 82,
+          "text": "標準語が、無機質なのだ。あまりにも。"
+        },
+        {
+          "kind": "line",
+          "line": 83,
+          "text": "……標準語？"
+        },
+        {
+          "kind": "line",
+          "line": 84,
+          "speaker": "amanatsu",
+          "text": "お前、だれ？"
+        },
+        {
+          "kind": "line",
+          "line": 85,
+          "speaker": "kansai",
+          "text": "何を言っているのですか？オレはオレです"
+        },
+        {
+          "kind": "line",
+          "line": 86,
+          "speaker": "kaabo",
+          "text": "そうだよ甘夏。急にどうした？"
+        },
+        {
+          "kind": "line",
+          "line": 87,
+          "text": "その違和感に気づきたくなかった。だから、いつものノリだと信じてとぼけたようなことを言う。"
+        },
+        {
+          "kind": "line",
+          "line": 88,
+          "text": "その言葉の裏では、心臓がどくどくと鳴ってうるさかった。"
+        },
+        {
+          "kind": "line",
+          "line": 89,
+          "speaker": "amanatsu",
+          "text": "関西は標準語使わない。絶対に"
+        },
+        {
+          "kind": "line",
+          "line": 90,
+          "speaker": "amanatsu",
+          "text": "なのにお前は標準語。だれ？"
+        },
+        {
+          "kind": "command",
+          "line": 91,
+          "name": "leave",
+          "args": [
+            "kansai"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 92,
+          "speaker": "kaabo",
+          "text": "なあ、あいつどうしたんだよ"
+        },
+        {
+          "kind": "line",
+          "line": 93,
+          "speaker": "amanatsu",
+          "text": "わかんない"
+        },
+        {
+          "kind": "line",
+          "line": 94,
+          "speaker": "kaabo",
+          "text": "ドッキリだよな…"
+        },
+        {
+          "kind": "line",
+          "line": 95,
+          "speaker": "amanatsu",
+          "text": "わかんない"
+        },
+        {
+          "kind": "line",
+          "line": 96,
+          "speaker": "kaabo",
+          "text": "これもしかしてヤバい？"
+        },
+        {
+          "kind": "line",
+          "line": 97,
+          "speaker": "amanatsu",
+          "text": "わかんない……"
+        },
+        {
+          "kind": "line",
+          "line": 98,
+          "speaker": "kaabo",
+          "text": "え、dpうするの"
+        },
+        {
+          "kind": "line",
+          "line": 99,
+          "speaker": "amanatsu",
+          "text": "あいつの部屋見に行く？"
+        },
+        {
+          "kind": "line",
+          "line": 100,
+          "speaker": "kaabo",
+          "text": "でも今外出禁止時間帯だし……"
+        },
+        {
+          "kind": "line",
+          "line": 101,
+          "speaker": "amanatsu",
+          "text": "まあドッキリならそろそろネタバラシするはず"
+        },
+        {
+          "kind": "line",
+          "line": 102,
+          "speaker": "amanatsu",
+          "text": "まて、水の音する"
+        },
+        {
+          "kind": "line",
+          "line": 103,
+          "speaker": "kaabo",
+          "text": "え……？"
+        },
+        {
+          "kind": "line",
+          "line": 104,
+          "speaker": "amanatsu",
+          "text": "さむい"
+        },
+        {
+          "kind": "line",
+          "line": 105,
+          "speaker": "amanatsu",
+          "text": "歩いれる"
+        },
+        {
+          "kind": "line",
+          "line": 106,
+          "speaker": "amanatsu",
+          "text": "たすぇて"
+        },
+        {
+          "kind": "line",
+          "line": 107,
+          "speaker": "amanatsu",
+          "text": "こっちきたたたたたたたた",
+          "tags": [
+            {
+              "key": "glitch",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 108,
+          "speaker": "kaabo",
+          "text": "大丈夫！？",
+          "tags": [
+            {
+              "key": "gap",
+              "value": "long"
+            }
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 109,
+          "speaker": "amanatsu",
+          "text": "問題ありません",
+          "tags": [
+            {
+              "key": "impostor",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 110,
+          "name": "chill",
+          "args": [
+            "0.6",
+            "4"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 111,
+          "text": "ああ、甘夏もだ。"
+        },
+        {
+          "kind": "line",
+          "line": 112,
+          "text": "さっきまでパニックでまともに文字も打てていなかった人間が突然こんな無機質な文章送ってくるわけない。"
+        },
+        {
+          "kind": "line",
+          "line": 113,
+          "speaker": "kaabo",
+          "text": "また、偽物なのか…？"
+        },
+        {
+          "kind": "command",
+          "line": 114,
+          "name": "leave",
+          "args": [
+            "amanatsu"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 115,
+          "text": "本能的に感じた。次は俺の番だと。"
+        },
+        {
+          "kind": "line",
+          "line": 116,
+          "text": "二人がいなくなったことさえ信じられていなかった俺はパニックになり、その場から動けなくなってしまった。"
+        },
+        {
+          "kind": "line",
+          "line": 117,
+          "text": "そうだ、きっとドッキリだよ。あいつらが俺をからかってるんだ。もう少ししたら戻ってくる。そうだそのはずだ。"
+        },
+        {
+          "kind": "line",
+          "line": 118,
+          "text": "俺は震える手でチャットを打ち続けた。"
+        },
+        {
+          "kind": "line",
+          "line": 119,
+          "text": "戻ってくることを信じて。"
+        },
+        {
+          "kind": "line",
+          "line": 120,
+          "speaker": "kaabo",
+          "text": "なあ嘘だろ？"
+        },
+        {
+          "kind": "line",
+          "line": 121,
+          "speaker": "kaabo",
+          "text": "じほんとはいるんだろ"
+        },
+        {
+          "kind": "command",
+          "line": 122,
+          "name": "ambience",
+          "args": [
+            "water",
+            "0.25"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 123,
+          "text": "おかしい。手元が、異常に冷たい。"
+        },
+        {
+          "kind": "line",
+          "line": 124,
+          "text": "気がつけば、フローリングの床がぐっしょりと濡れている。"
+        },
+        {
+          "kind": "line",
+          "line": 125,
+          "text": "どこからか溢れ出した水が、俺の足元をひたひたと浸していた。"
+        },
+        {
+          "kind": "line",
+          "line": 126,
+          "text": "冷たい。寒気が止まらない。指がかじかんで、うまくキーが叩けない。"
+        },
+        {
+          "kind": "line",
+          "line": 127,
+          "speaker": "kaabo",
+          "text": "もどってくるよんｓ",
+          "tags": [
+            {
+              "key": "glitch",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 128,
+          "speaker": "kaabo",
+          "text": "とるあえずけいさち",
+          "tags": [
+            {
+              "key": "glitch",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 129,
+          "name": "se",
+          "args": [
+            "drip"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 130,
+          "text": "ピチャ……、ピチャ……。"
+        },
+        {
+          "kind": "line",
+          "line": 131,
+          "text": "背後から、水浸しの足音が近づいてくる。"
+        },
+        {
+          "kind": "line",
+          "line": 132,
+          "text": "振り返っちゃダメだ。振り返ったら、俺は――。"
+        },
+        {
+          "kind": "line",
+          "line": 133,
+          "speaker": "kaabo",
+          "text": "みずのおとがする",
+          "tags": [
+            {
+              "key": "glitch",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 134,
+          "speaker": "kaabo",
+          "text": "おれもおわるんだ",
+          "tags": [
+            {
+              "key": "glitch",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 135,
+          "speaker": "kaabo",
+          "text": "はやくけいさつ",
+          "tags": [
+            {
+              "key": "glitch",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 136,
+          "name": "chill",
+          "args": [
+            "0.9",
+            "2"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 137,
+          "name": "leave",
+          "args": [
+            "kaabo"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 138,
+          "name": "wait",
+          "args": [
+            "2.5"
+          ]
+        },
+        {
+          "kind": "jump",
+          "line": 139,
+          "node": "News"
+        }
+      ]
+    },
+    {
+      "title": "News",
+      "file": "assets/talk/curse_chat.yarn",
+      "line": 142,
+      "headers": [],
+      "body": [
+        {
+          "kind": "command",
+          "line": 144,
+          "name": "silence"
+        },
+        {
+          "kind": "command",
+          "line": 145,
+          "name": "tv",
+          "args": [
+            "caster"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 146,
+          "name": "ambience",
+          "args": [
+            "static",
+            "0.35"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 147,
+          "name": "wait",
+          "args": [
+            "1.5"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 148,
+          "speaker": "caster",
+          "text": "……続いてのニュースです"
+        },
+        {
+          "kind": "line",
+          "line": 149,
+          "speaker": "caster",
+          "text": "本日午後8時頃、都内の学生アパートで、住人の男女3名が死亡しているのが発見されました"
+        },
+        {
+          "kind": "line",
+          "line": 150,
+          "speaker": "caster",
+          "text": "3人はいずれも心肺停止の状態で、目立った外傷や持病はなく、警察は急性心不全とみて調べています"
+        },
+        {
+          "kind": "line",
+          "line": 151,
+          "speaker": "caster",
+          "text": "また、3人は死亡直前までネット上でチャットをしていたとみられます"
+        },
+        {
+          "kind": "command",
+          "line": 152,
+          "name": "ambience",
+          "args": [
+            "water",
+            "0.5"
+          ]
+        },
+        {
+          "kind": "line",
+          "line": 153,
+          "speaker": "caster",
+          "text": "現場の部屋はいずれも、玄関から遺体の発見場所まで、大量の水が滴り落ちたような跡があり……警察は発言の因果関係を、調べて、いま……っ、あ、がはっ……！",
+          "tags": [
+            {
+              "key": "glitch",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 154,
+          "name": "se",
+          "args": [
+            "thud"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 155,
+          "name": "tv",
+          "args": [
+            "fallen"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 156,
+          "name": "shake"
+        },
+        {
+          "kind": "command",
+          "line": 157,
+          "name": "se",
+          "args": [
+            "howl"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 158,
+          "name": "wait",
+          "args": [
+            "2.0"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 159,
+          "name": "drops",
+          "args": [
+            "on"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 160,
+          "name": "ambience",
+          "args": [
+            "static_loud",
+            "1.0"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 161,
+          "name": "ambience",
+          "args": [
+            "static",
+            "off"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 162,
+          "name": "wait",
+          "args": [
+            "3.5"
+          ]
+        },
+        {
+          "kind": "jump",
+          "line": 163,
+          "node": "Behind"
+        }
+      ]
+    },
+    {
+      "title": "Behind",
+      "file": "assets/talk/curse_chat.yarn",
+      "line": 166,
+      "headers": [],
+      "body": [
+        {
+          "kind": "command",
+          "line": 168,
+          "name": "silence"
+        },
+        {
+          "kind": "command",
+          "line": 169,
+          "name": "drops",
+          "args": [
+            "off"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 170,
+          "name": "dark"
+        },
+        {
+          "kind": "command",
+          "line": 171,
+          "name": "wait",
+          "args": [
+            "4"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 172,
+          "name": "scare",
+          "args": [
+            "ウシロニイルヨ"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 173,
+          "name": "se",
+          "args": [
+            "behind"
+          ]
+        },
+        {
+          "kind": "command",
+          "line": 174,
+          "name": "wait",
+          "args": [
+            "3"
+          ]
+        }
+      ]
+    }
+  ]
+}

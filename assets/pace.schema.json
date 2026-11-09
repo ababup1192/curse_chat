@@ -1,0 +1,154 @@
+{
+  "//": "chat.pace.json の形の宣言（Studio の sections 方言）。チャットの流れの数。既定は src/PaceDoc.flix の defaults() が正。",
+  "version": 1,
+  "sections": {
+    "chatClockStart": {
+      "kind": "field",
+      "type": "text",
+      "label": "最初の発言の時刻（時:分）",
+      "group": "時刻",
+      "order": 1,
+      "default": "23:41"
+    },
+    "minutesPerPost": {
+      "kind": "field",
+      "type": "float",
+      "label": "発言 1 つで進む分",
+      "group": "時刻",
+      "order": 2,
+      "min": 0,
+      "max": 5,
+      "default": 0.25
+    },
+    "amanatsuCps": {
+      "kind": "field",
+      "type": "float",
+      "label": "甘夏の打つ速さ（1 秒の字数）",
+      "group": "打つ速さ",
+      "order": 3,
+      "min": 1,
+      "max": 100,
+      "default": 15.0
+    },
+    "kaaboCps": {
+      "kind": "field",
+      "type": "float",
+      "label": "かーぼーの打つ速さ（入力欄に一字ずつ出る）",
+      "group": "打つ速さ",
+      "order": 4,
+      "min": 1,
+      "max": 100,
+      "default": 10.0
+    },
+    "kansaiCps": {
+      "kind": "field",
+      "type": "float",
+      "label": "関西ボーイの打つ速さ",
+      "group": "打つ速さ",
+      "order": 5,
+      "min": 1,
+      "max": 100,
+      "default": 17.0
+    },
+    "casterCps": {
+      "kind": "field",
+      "type": "float",
+      "label": "ニュースの字幕を出す速さ",
+      "group": "打つ速さ",
+      "order": 6,
+      "min": 1,
+      "max": 100,
+      "default": 16.0
+    },
+    "gapBase": {
+      "kind": "field",
+      "type": "float",
+      "label": "発言を出し終えてから次へ流すまでの秒",
+      "group": "発言の間",
+      "order": 7,
+      "min": 0,
+      "max": 10,
+      "default": 0.9
+    },
+    "gapPerChar": {
+      "kind": "field",
+      "type": "float",
+      "label": "発言の間に足す 1 字あたりの秒",
+      "group": "発言の間",
+      "order": 8,
+      "min": 0,
+      "max": 1,
+      "default": 0.06
+    },
+    "gapLong": {
+      "kind": "field",
+      "type": "float",
+      "label": "#gap:long で足す秒",
+      "group": "発言の間",
+      "order": 9,
+      "min": 0,
+      "max": 10,
+      "default": 1.8
+    },
+    "gapLonger": {
+      "kind": "field",
+      "type": "float",
+      "label": "#gap:longer で足す秒",
+      "group": "発言の間",
+      "order": 10,
+      "min": 0,
+      "max": 10,
+      "default": 3.2
+    },
+    "feedMax": {
+      "kind": "field",
+      "type": "int",
+      "label": "チャットの履歴に残す行の数",
+      "group": "画面",
+      "order": 11,
+      "min": 5,
+      "max": 200,
+      "default": 40
+    },
+    "slideSeconds": {
+      "kind": "field",
+      "type": "float",
+      "label": "新しい発言が下から入って履歴を押し上げる秒",
+      "group": "画面",
+      "order": 12,
+      "min": 0,
+      "max": 2,
+      "default": 0.24
+    },
+    "thoughtDim": {
+      "kind": "field",
+      "type": "float",
+      "label": "地の文の層でチャットを沈める濃さ（0〜1）",
+      "group": "画面",
+      "order": 13,
+      "min": 0,
+      "max": 1,
+      "default": 0.82
+    },
+    "thoughtFadeSeconds": {
+      "kind": "field",
+      "type": "float",
+      "label": "地の文の層が出る・消える秒",
+      "group": "画面",
+      "order": 14,
+      "min": 0,
+      "max": 3,
+      "default": 0.6
+    },
+    "scareSeconds": {
+      "kind": "field",
+      "type": "float",
+      "label": "血文字を出している秒",
+      "group": "画面",
+      "order": 15,
+      "min": 0.05,
+      "max": 5,
+      "default": 0.7
+    }
+  }
+}

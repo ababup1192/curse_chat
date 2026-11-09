@@ -1,0 +1,102 @@
+{
+  "//": "novel.theme.json の形の宣言（Studio の sections 方言）。既定は src/ThemeDoc.flix の defaults() が正。",
+  "version": 2,
+  "sections": {
+    "rail": {
+      "kind": "field",
+      "type": "color",
+      "label": "チャットアプリの左端の列の地",
+      "order": 1,
+      "group": "UI",
+      "required": true
+    },
+    "sidebar": {
+      "kind": "field",
+      "type": "color",
+      "label": "チャンネルの列の地",
+      "order": 2,
+      "group": "UI",
+      "required": true
+    },
+    "chat": {
+      "kind": "field",
+      "type": "color",
+      "label": "会話の地",
+      "order": 3,
+      "group": "UI",
+      "required": true
+    },
+    "ink": {
+      "kind": "field",
+      "type": "color",
+      "label": "字",
+      "order": 4,
+      "group": "UI",
+      "required": true
+    },
+    "inkDim": {
+      "kind": "field",
+      "type": "color",
+      "label": "時刻・入退室・案内の字",
+      "order": 5,
+      "group": "UI",
+      "required": true
+    },
+    "accent": {
+      "kind": "field",
+      "type": "color",
+      "label": "選んでいる物・オートとスキップの点灯（差し色）",
+      "order": 6,
+      "group": "UI",
+      "required": true
+    },
+    "amanatsu": {
+      "kind": "field",
+      "type": "color",
+      "label": "甘夏の色（黄）",
+      "order": 7,
+      "group": "3 人",
+      "required": true
+    },
+    "kaabo": {
+      "kind": "field",
+      "type": "color",
+      "label": "かーぼーの色（緑）",
+      "order": 8,
+      "group": "3 人",
+      "required": true
+    },
+    "kansai": {
+      "kind": "field",
+      "type": "color",
+      "label": "関西ボーイの色（赤）",
+      "order": 9,
+      "group": "3 人",
+      "required": true
+    },
+    "water": {
+      "kind": "field",
+      "type": "color",
+      "label": "冷えと水滴の青白",
+      "order": 10,
+      "group": "恐怖",
+      "required": true
+    },
+    "blood": {
+      "kind": "field",
+      "type": "color",
+      "label": "血文字（最後の 1 回だけ）",
+      "order": 11,
+      "group": "恐怖",
+      "required": true
+    },
+    "thought": {
+      "kind": "field",
+      "type": "color",
+      "label": "地の文の字",
+      "order": 12,
+      "group": "恐怖",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "//": "novel.portrait.json の形の宣言（Studio の sections 方言）。縦の画面の時だけ使う字と押せる物の大きさ。置き場所はコード（src/Layout.flix）。既定は src/PortraitDoc.flix の defaults() が正。",
+  "version": 1,
+  "sections": {
+    "headerHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "上の帯（チャンネル名）の高さ（px）",
+      "group": "チャット",
+      "order": 1,
+      "min": 72,
+      "max": 160,
+      "default": 104.0
+    },
+    "headerTitleSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "チャンネル名の字（px）",
+      "group": "チャット",
+      "order": 2,
+      "min": 16,
+      "max": 44,
+      "default": 30.0
+    },
+    "headerSubSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "人数の字（px）",
+      "group": "チャット",
+      "order": 3,
+      "min": 12,
+      "max": 30,
+      "default": 18.0
+    },
+    "menuButtonSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "≡ の押せる大きさ（px）",
+      "group": "チャット",
+      "order": 4,
+      "min": 60,
+      "max": 110,
+      "default": 76.0
+    },
+    "menuItemTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "≡ のメニューの字（px）",
+      "group": "チャット",
+      "order": 5,
+      "min": 14,
+      "max": 40,
+      "default": 25.0
+    },
+    "menuItemHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "≡ のメニューの 1 項目の高さ（px）",
+      "group": "チャット",
+      "order": 6,
+      "min": 60,
+      "max": 110,
+      "default": 72.0
+    },
+    "chatBodySize": {
+      "kind": "field",
+      "type": "float",
+      "label": "発言の本文の字（px）",
+      "group": "チャット",
+      "order": 7,
+      "min": 16,
+      "max": 40,
+      "default": 27.0
+    },
+    "chatNameSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "発言の名前の字（px）",
+      "group": "チャット",
+      "order": 8,
+      "min": 14,
+      "max": 40,
+      "default": 24.0
+    },
+    "avatarSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "発言のアバターの直径（px）",
+      "group": "チャット",
+      "order": 9,
+      "min": 32,
+      "max": 100,
+      "default": 64.0
+    },
+    "typingSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "「入力中…」の字（px）",
+      "group": "チャット",
+      "order": 10,
+      "min": 12,
+      "max": 32,
+      "default": 20.0
+    },
+    "inputHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "入力欄の高さ（px）",
+      "group": "チャット",
+      "order": 11,
+      "min": 60,
+      "max": 120,
+      "default": 80.0
+    },
+    "homeBarGap": {
+      "kind": "field",
+      "type": "float",
+      "label": "入力欄の下のホームバーの余白（px）",
+      "group": "チャット",
+      "order": 12,
+      "min": 0,
+      "max": 100,
+      "default": 44.0
+    },
+    "thoughtSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "地の文の字（px）",
+      "group": "地の文とテレビ",
+      "order": 13,
+      "min": 18,
+      "max": 48,
+      "default": 31.0
+    },
+    "thoughtDim": {
+      "kind": "field",
+      "type": "float",
+      "label": "地の文の層でチャットを沈める濃さ（0〜1。横は chat.pace.json の thoughtDim）",
+      "group": "地の文とテレビ",
+      "order": 14,
+      "min": 0,
+      "max": 1,
+      "default": 0.94
+    },
+    "captionSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "テレビの字幕の字（px）",
+      "group": "地の文とテレビ",
+      "order": 15,
+      "min": 16,
+      "max": 40,
+      "default": 27.0
+    },
+    "titleItemTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "タイトルのメニューの字（px）",
+      "group": "タイトル",
+      "order": 16,
+      "min": 16,
+      "max": 48,
+      "default": 30.0
+    },
+    "titleItemHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "タイトルのメニューの 1 つの高さ（px）",
+      "group": "タイトル",
+      "order": 17,
+      "min": 60,
+      "max": 110,
+      "default": 72.0
+    },
+    "noteSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "案内と音の注意の字（px）",
+      "group": "タイトル",
+      "order": 18,
+      "min": 12,
+      "max": 30,
+      "default": 19.0
+    },
+    "backTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "「戻る」の字（px）",
+      "group": "画面",
+      "order": 19,
+      "min": 14,
+      "max": 36,
+      "default": 22.0
+    },
+    "backHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "「戻る」の高さ（px）",
+      "group": "画面",
+      "order": 20,
+      "min": 60,
+      "max": 100,
+      "default": 66.0
+    },
+    "tabTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "セーブ・ロードのタブの字（px）",
+      "group": "画面",
+      "order": 21,
+      "min": 14,
+      "max": 32,
+      "default": 20.0
+    },
+    "tabHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "セーブ・ロードのタブの高さ（px）",
+      "group": "画面",
+      "order": 22,
+      "min": 60,
+      "max": 100,
+      "default": 66.0
+    },
+    "slotTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "セーブの枠の番号・日時・発言の字（px）",
+      "group": "画面",
+      "order": 23,
+      "min": 12,
+      "max": 30,
+      "default": 19.0
+    },
+    "slotPlaceSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "セーブの枠の場所の字（px）",
+      "group": "画面",
+      "order": 24,
+      "min": 14,
+      "max": 36,
+      "default": 24.0
+    },
+    "settingTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "設定の行の字（px）",
+      "group": "画面",
+      "order": 25,
+      "min": 14,
+      "max": 32,
+      "default": 20.0
+    },
+    "settingRowHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "設定の行の高さ（px）",
+      "group": "画面",
+      "order": 26,
+      "min": 60,
+      "max": 100,
+      "default": 68.0
+    },
+    "logTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "バックログの本文の字（px）",
+      "group": "画面",
+      "order": 27,
+      "min": 14,
+      "max": 36,
+      "default": 24.0
+    },
+    "askTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "確認のウィンドウの問いの字（px）",
+      "group": "確認",
+      "order": 28,
+      "min": 14,
+      "max": 36,
+      "default": 25.0
+    },
+    "askButtonTextSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "確認のウィンドウのはい・いいえの字（px）",
+      "group": "確認",
+      "order": 29,
+      "min": 14,
+      "max": 36,
+      "default": 24.0
+    },
+    "askButtonHeight": {
+      "kind": "field",
+      "type": "float",
+      "label": "確認のウィンドウのはい・いいえの高さ（px）",
+      "group": "確認",
+      "order": 30,
+      "min": 60,
+      "max": 110,
+      "default": 72.0
+    },
+    "creditsHeadingSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "クレジットの見出しの字（px）",
+      "group": "クレジット",
+      "order": 31,
+      "min": 18,
+      "max": 48,
+      "default": 34.0
+    },
+    "creditsBodySize": {
+      "kind": "field",
+      "type": "float",
+      "label": "クレジットの本文の字（px）",
+      "group": "クレジット",
+      "order": 32,
+      "min": 14,
+      "max": 32,
+      "default": 23.0
+    },
+    "creditsSmallSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "クレジットの出典の字（px）",
+      "group": "クレジット",
+      "order": 33,
+      "min": 12,
+      "max": 22,
+      "default": 17.0
+    }
+  }
+}

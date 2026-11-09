@@ -1,0 +1,20 @@
+# 見せ場をつないだ紹介の動画（make showcase-video）。タイトル → チャットの出だし → 関西ボーイが入れ替わる所 →
+# 甘夏が崩れる所 → かーぼーの足元に水が来る所 → テレビのニュースとキャスターが倒れる所 → 暗転と血文字 → クレジット。
+# WhyNot: 頭から続けて読ませない — 地の文に届く前に 1 分半チャットが続き、見せ場が動画の外へ出る。start talk line= で場面を切ってつなぐ。
+fps 30
+start title
+wait 3
+tap confirm
+drive reader until posts>=6 max 40
+wait 1
+start talk node=Chat line=69
+drive reader until talkLine=assets/talk/curse_chat.yarn:84 max 90
+wait 1.5
+start talk node=Chat line=102
+drive reader until talkLine=assets/talk/curse_chat.yarn:113 max 60
+wait 1.5
+start talk node=Chat line=122
+drive reader until talk=News max 120
+drive reader until screen=Dark max 120
+drive reader until phase=Credits max 30
+wait 4

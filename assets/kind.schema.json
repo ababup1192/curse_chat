@@ -1,0 +1,341 @@
+{
+  "//": "novel.kind.json の形の宣言（Studio の sections 方言）。手触りの数の初期値だけ Doc に置き、規則はコード側。既定は src/KindDoc.flix の defaults() が正。",
+  "version": 2,
+  "sections": {
+    "bodySize": {
+      "kind": "field",
+      "type": "float",
+      "label": "チャットの本文の字の大きさ（px）",
+      "order": 1,
+      "group": "字",
+      "min": 10,
+      "max": 28,
+      "default": 15.0
+    },
+    "nameSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "チャットの名前の字の大きさ（px）",
+      "order": 2,
+      "group": "字",
+      "min": 10,
+      "max": 28,
+      "default": 15.0
+    },
+    "lineGap": {
+      "kind": "field",
+      "type": "float",
+      "label": "チャットの本文の行の間（px）",
+      "order": 3,
+      "group": "字",
+      "min": 0,
+      "max": 20,
+      "default": 5.0
+    },
+    "thoughtSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "地の文の字の大きさ（px）",
+      "order": 4,
+      "group": "字",
+      "min": 14,
+      "max": 40,
+      "default": 22.0
+    },
+    "captionSize": {
+      "kind": "field",
+      "type": "float",
+      "label": "テレビの字幕の字の大きさ（px）",
+      "order": 5,
+      "group": "字",
+      "min": 14,
+      "max": 40,
+      "default": 22.0
+    },
+    "cps": {
+      "kind": "field",
+      "type": "float",
+      "label": "文字の速さの既定（地の文の 1 秒の字数。発言の打つ速さはこれに対する倍率で chat.pace.json の速さに掛かる。設定の画面で変えた値は saves/novel.json）",
+      "order": 6,
+      "group": "設定の既定",
+      "min": 5,
+      "max": 200,
+      "default": 40.0
+    },
+    "autoWait": {
+      "kind": "field",
+      "type": "float",
+      "label": "オートの待ちの既定（地の文を出し終えてから送るまでの秒）",
+      "order": 7,
+      "group": "設定の既定",
+      "min": 0,
+      "max": 10,
+      "default": 1.6
+    },
+    "masterVolume": {
+      "kind": "field",
+      "type": "float",
+      "label": "全体の音量の既定（0〜1。環境音と効果音に掛ける）",
+      "order": 8,
+      "group": "設定の既定",
+      "min": 0,
+      "max": 1,
+      "default": 1.0
+    },
+    "ambienceVolume": {
+      "kind": "field",
+      "type": "float",
+      "label": "環境音の音量の既定（0〜1）",
+      "order": 9,
+      "group": "設定の既定",
+      "min": 0,
+      "max": 1,
+      "default": 0.8
+    },
+    "seVolume": {
+      "kind": "field",
+      "type": "float",
+      "label": "効果音の音量の既定（0〜1）",
+      "order": 10,
+      "group": "設定の既定",
+      "min": 0,
+      "max": 1,
+      "default": 0.8
+    },
+    "autoPerChar": {
+      "kind": "field",
+      "type": "float",
+      "label": "オートの待ちに足す 1 字あたりの秒",
+      "order": 11,
+      "group": "送り",
+      "min": 0,
+      "max": 1,
+      "default": 0.05
+    },
+    "skipInterval": {
+      "kind": "field",
+      "type": "float",
+      "label": "スキップで 1 行を出す間（秒）",
+      "order": 12,
+      "group": "送り",
+      "min": 0.01,
+      "max": 1,
+      "default": 0.06
+    },
+    "logMax": {
+      "kind": "field",
+      "type": "int",
+      "label": "バックログに残す行の数",
+      "order": 13,
+      "group": "送り",
+      "min": 10,
+      "max": 1000,
+      "default": 200
+    },
+    "shakeSeconds": {
+      "kind": "field",
+      "type": "float",
+      "label": "<<shake>> の長さ（秒）",
+      "order": 14,
+      "group": "演出",
+      "min": 0,
+      "max": 3,
+      "default": 0.6
+    },
+    "shakePx": {
+      "kind": "field",
+      "type": "float",
+      "label": "<<shake>> の揺れ幅（px）",
+      "order": 15,
+      "group": "演出",
+      "min": 0,
+      "max": 40,
+      "default": 10.0
+    },
+    "creditsSpeed": {
+      "kind": "field",
+      "type": "float",
+      "label": "クレジットが流れる速さ（px/秒）",
+      "order": 16,
+      "group": "演出",
+      "min": 5,
+      "max": 200,
+      "default": 34.0
+    },
+    "toastSeconds": {
+      "kind": "field",
+      "type": "float",
+      "label": "知らせを出す秒",
+      "order": 17,
+      "group": "演出",
+      "min": 0.2,
+      "max": 10,
+      "default": 1.6
+    },
+    "holdFadeSeconds": {
+      "kind": "field",
+      "type": "float",
+      "label": "ブラウザ版で後回しの環境音がまだ届いていない時に、黒へ重ねる秒（戻す秒も同じ）",
+      "order": 18,
+      "group": "素材の待ち",
+      "min": 0,
+      "max": 3,
+      "default": 0.4
+    },
+    "holdGiveUpSeconds": {
+      "kind": "field",
+      "type": "float",
+      "label": "黒のまま待って諦めて進むまでの秒",
+      "order": 19,
+      "group": "素材の待ち",
+      "min": 1,
+      "max": 120,
+      "default": 20.0
+    },
+    "holdMarkSeconds": {
+      "kind": "field",
+      "type": "float",
+      "label": "黒になってから隅に待ちの印を出すまでの秒",
+      "order": 20,
+      "group": "素材の待ち",
+      "min": 0,
+      "max": 10,
+      "default": 0.4
+    },
+    "cpsSlider": {
+      "kind": "record",
+      "label": "文字の速さのスライダー（上限はノーウェイト）",
+      "group": "設定の画面のスライダー",
+      "order": 21,
+      "fields": {
+        "min": {
+          "type": "float",
+          "label": "下限",
+          "order": 1,
+          "default": 10.0
+        },
+        "max": {
+          "type": "float",
+          "label": "上限（ここまで上げるとノーウェイト = 行を一度に全部出す）",
+          "order": 2,
+          "default": 130.0
+        },
+        "step": {
+          "type": "float",
+          "label": "1 押しの量",
+          "order": 3,
+          "min": 0.01,
+          "default": 10.0
+        }
+      }
+    },
+    "autoWaitSlider": {
+      "kind": "record",
+      "label": "オートの待ちのスライダー",
+      "group": "設定の画面のスライダー",
+      "order": 22,
+      "fields": {
+        "min": {
+          "type": "float",
+          "label": "下限",
+          "order": 1,
+          "default": 0.2
+        },
+        "max": {
+          "type": "float",
+          "label": "上限",
+          "order": 2,
+          "default": 4.0
+        },
+        "step": {
+          "type": "float",
+          "label": "1 押しの量",
+          "order": 3,
+          "min": 0.01,
+          "default": 0.2
+        }
+      }
+    },
+    "masterVolumeSlider": {
+      "kind": "record",
+      "label": "全体の音量のスライダー",
+      "group": "設定の画面のスライダー",
+      "order": 23,
+      "fields": {
+        "min": {
+          "type": "float",
+          "label": "下限",
+          "order": 1,
+          "default": 0.0
+        },
+        "max": {
+          "type": "float",
+          "label": "上限",
+          "order": 2,
+          "default": 1.0
+        },
+        "step": {
+          "type": "float",
+          "label": "1 押しの量",
+          "order": 3,
+          "min": 0.01,
+          "default": 0.1
+        }
+      }
+    },
+    "ambienceVolumeSlider": {
+      "kind": "record",
+      "label": "環境音のスライダー",
+      "group": "設定の画面のスライダー",
+      "order": 24,
+      "fields": {
+        "min": {
+          "type": "float",
+          "label": "下限",
+          "order": 1,
+          "default": 0.0
+        },
+        "max": {
+          "type": "float",
+          "label": "上限",
+          "order": 2,
+          "default": 1.0
+        },
+        "step": {
+          "type": "float",
+          "label": "1 押しの量",
+          "order": 3,
+          "min": 0.01,
+          "default": 0.1
+        }
+      }
+    },
+    "seVolumeSlider": {
+      "kind": "record",
+      "label": "効果音のスライダー",
+      "group": "設定の画面のスライダー",
+      "order": 25,
+      "fields": {
+        "min": {
+          "type": "float",
+          "label": "下限",
+          "order": 1,
+          "default": 0.0
+        },
+        "max": {
+          "type": "float",
+          "label": "上限",
+          "order": 2,
+          "default": 1.0
+        },
+        "step": {
+          "type": "float",
+          "label": "1 押しの量",
+          "order": 3,
+          "min": 0.01,
+          "default": 0.1
+        }
+      }
+    }
+  }
+}
